@@ -1,0 +1,1484 @@
+KIDS Distribution saved on Apr 11, 2009@16:23:57
+Initial ePrescribing prototyping
+**KIDS**:C0P*1.0*1^
+
+**INSTALL NAME**
+C0P*1.0*1
+"BLD",6966,0)
+C0P*1.0*1^^0^3090411^y
+"BLD",6966,4,0)
+^9.64PA^175.201^2
+"BLD",6966,4,175.101,0)
+175.101
+"BLD",6966,4,175.101,222)
+y^y^f^^n^^y^o^n
+"BLD",6966,4,175.201,0)
+175.201
+"BLD",6966,4,175.201,222)
+y^y^f^^n^^y^o^n
+"BLD",6966,4,"B",175.101,175.101)
+
+"BLD",6966,4,"B",175.201,175.201)
+
+"BLD",6966,6.3)
+1
+"BLD",6966,"KRN",0)
+^9.67PA^8989.52^19
+"BLD",6966,"KRN",.4,0)
+.4
+"BLD",6966,"KRN",.401,0)
+.401
+"BLD",6966,"KRN",.402,0)
+.402
+"BLD",6966,"KRN",.403,0)
+.403
+"BLD",6966,"KRN",.5,0)
+.5
+"BLD",6966,"KRN",.84,0)
+.84
+"BLD",6966,"KRN",3.6,0)
+3.6
+"BLD",6966,"KRN",3.8,0)
+3.8
+"BLD",6966,"KRN",9.2,0)
+9.2
+"BLD",6966,"KRN",9.8,0)
+9.8
+"BLD",6966,"KRN",9.8,"NM",0)
+^9.68A^2^2
+"BLD",6966,"KRN",9.8,"NM",1,0)
+C0PEWD1^^0^B8658372
+"BLD",6966,"KRN",9.8,"NM",2,0)
+C0PEWDU^^0^B1881609
+"BLD",6966,"KRN",9.8,"NM","B","C0PEWD1",1)
+
+"BLD",6966,"KRN",9.8,"NM","B","C0PEWDU",2)
+
+"BLD",6966,"KRN",19,0)
+19
+"BLD",6966,"KRN",19.1,0)
+19.1
+"BLD",6966,"KRN",101,0)
+101
+"BLD",6966,"KRN",409.61,0)
+409.61
+"BLD",6966,"KRN",771,0)
+771
+"BLD",6966,"KRN",870,0)
+870
+"BLD",6966,"KRN",8989.51,0)
+8989.51
+"BLD",6966,"KRN",8989.52,0)
+8989.52
+"BLD",6966,"KRN",8994,0)
+8994
+"BLD",6966,"KRN","B",.4,.4)
+
+"BLD",6966,"KRN","B",.401,.401)
+
+"BLD",6966,"KRN","B",.402,.402)
+
+"BLD",6966,"KRN","B",.403,.403)
+
+"BLD",6966,"KRN","B",.5,.5)
+
+"BLD",6966,"KRN","B",.84,.84)
+
+"BLD",6966,"KRN","B",3.6,3.6)
+
+"BLD",6966,"KRN","B",3.8,3.8)
+
+"BLD",6966,"KRN","B",9.2,9.2)
+
+"BLD",6966,"KRN","B",9.8,9.8)
+
+"BLD",6966,"KRN","B",19,19)
+
+"BLD",6966,"KRN","B",19.1,19.1)
+
+"BLD",6966,"KRN","B",101,101)
+
+"BLD",6966,"KRN","B",409.61,409.61)
+
+"BLD",6966,"KRN","B",771,771)
+
+"BLD",6966,"KRN","B",870,870)
+
+"BLD",6966,"KRN","B",8989.51,8989.51)
+
+"BLD",6966,"KRN","B",8989.52,8989.52)
+
+"BLD",6966,"KRN","B",8994,8994)
+
+"DATA",175.101,1,0)
+DrugAllergyInteraction^https://secure.newcropaccounts.com/V7/webservices/DrugAllergyInteraction
+"DATA",175.101,1,1,0)
+^175.1012^28^28^3090303^^
+"DATA",175.101,1,1,1,0)
+ <DrugAllergyInteraction 
+"DATA",175.101,1,1,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,1,1,3,0)
+      <credentials>
+"DATA",175.101,1,1,4,0)
+        <PartnerName>string</PartnerName>
+"DATA",175.101,1,1,5,0)
+        <Name>string</Name>
+"DATA",175.101,1,1,6,0)
+        <Password>string</Password>
+"DATA",175.101,1,1,7,0)
+      </credentials>
+"DATA",175.101,1,1,8,0)
+      <accountRequest>
+"DATA",175.101,1,1,9,0)
+        <AccountId>string</AccountId>
+"DATA",175.101,1,1,10,0)
+        <SiteId>string</SiteId>
+"DATA",175.101,1,1,11,0)
+      </accountRequest>
+"DATA",175.101,1,1,12,0)
+      <patientRequest>
+"DATA",175.101,1,1,13,0)
+        <PatientId>string</PatientId>
+"DATA",175.101,1,1,14,0)
+      </patientRequest>
+"DATA",175.101,1,1,15,0)
+      <patientInformationRequester>
+"DATA",175.101,1,1,16,0)
+        <UserType>string</UserType>
+"DATA",175.101,1,1,17,0)
+        <UserId>string</UserId>
+"DATA",175.101,1,1,18,0)
+      </patientInformationRequester>
+"DATA",175.101,1,1,19,0)
+      <allergies>
+"DATA",175.101,1,1,20,0)
+        <string>string</string>
+"DATA",175.101,1,1,21,0)
+        <string>string</string>
+"DATA",175.101,1,1,22,0)
+      </allergies>
+"DATA",175.101,1,1,23,0)
+      <proposedMedications>
+"DATA",175.101,1,1,24,0)
+        <string>string</string>
+"DATA",175.101,1,1,25,0)
+        <string>string</string>
+"DATA",175.101,1,1,26,0)
+      </proposedMedications>
+"DATA",175.101,1,1,27,0)
+      <drugStandardType>string</drugStandardType>
+"DATA",175.101,1,1,28,0)
+    </DrugAllergyInteraction>
+"DATA",175.101,1,2,0)
+^175.1013^18^18^3090303^^
+"DATA",175.101,1,2,1,0)
+<DrugAllergyInteractionResult>
+"DATA",175.101,1,2,2,0)
+        <result>
+"DATA",175.101,1,2,3,0)
+          <Status>Unknown or OK or Fail or NotFound</Status>
+"DATA",175.101,1,2,4,0)
+          <Message>string</Message>
+"DATA",175.101,1,2,5,0)
+          <XmlResponse>string</XmlResponse>
+"DATA",175.101,1,2,6,0)
+          <RowCount>int</RowCount>
+"DATA",175.101,1,2,7,0)
+          <Timing>int</Timing>
+"DATA",175.101,1,2,8,0)
+        </result>
+"DATA",175.101,1,2,9,0)
+        <drugAllergyDetailArray>
+"DATA",175.101,1,2,10,0)
+          <DrugAllergyDetail>
+"DATA",175.101,1,2,11,0)
+            <InteractionText>string</InteractionText>
+"DATA",175.101,1,2,12,0)
+          </DrugAllergyDetail>
+"DATA",175.101,1,2,13,0)
+          <DrugAllergyDetail>
+"DATA",175.101,1,2,14,0)
+            <InteractionText>string</InteractionText>
+"DATA",175.101,1,2,15,0)
+          </DrugAllergyDetail>
+"DATA",175.101,1,2,16,0)
+        </drugAllergyDetailArray>
+"DATA",175.101,1,2,17,0)
+      </DrugAllergyInteractionResult>
+"DATA",175.101,1,2,18,0)
+    </DrugAllergyInteractionResponse>
+"DATA",175.101,2,0)
+DrugDrugInteraction^https://secure.newcropaccounts.com/V7/webservices/DrugDrugInteraction
+"DATA",175.101,2,1,0)
+^^28^28^3090303^
+"DATA",175.101,2,1,1,0)
+<DrugDrugInteraction 
+"DATA",175.101,2,1,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,2,1,3,0)
+      <credentials>
+"DATA",175.101,2,1,4,0)
+        <PartnerName>string</PartnerName>
+"DATA",175.101,2,1,5,0)
+        <Name>string</Name>
+"DATA",175.101,2,1,6,0)
+        <Password>string</Password>
+"DATA",175.101,2,1,7,0)
+      </credentials>
+"DATA",175.101,2,1,8,0)
+      <accountRequest>
+"DATA",175.101,2,1,9,0)
+        <AccountId>string</AccountId>
+"DATA",175.101,2,1,10,0)
+        <SiteId>string</SiteId>
+"DATA",175.101,2,1,11,0)
+      </accountRequest>
+"DATA",175.101,2,1,12,0)
+      <patientRequest>
+"DATA",175.101,2,1,13,0)
+        <PatientId>string</PatientId>
+"DATA",175.101,2,1,14,0)
+      </patientRequest>
+"DATA",175.101,2,1,15,0)
+      <patientInformationRequester>
+"DATA",175.101,2,1,16,0)
+        <UserType>string</UserType>
+"DATA",175.101,2,1,17,0)
+        <UserId>string</UserId>
+"DATA",175.101,2,1,18,0)
+      </patientInformationRequester>
+"DATA",175.101,2,1,19,0)
+      <currentMedications>
+"DATA",175.101,2,1,20,0)
+        <string>string</string>
+"DATA",175.101,2,1,21,0)
+        <string>string</string>
+"DATA",175.101,2,1,22,0)
+      </currentMedications>
+"DATA",175.101,2,1,23,0)
+      <proposedMedications>
+"DATA",175.101,2,1,24,0)
+        <string>string</string>
+"DATA",175.101,2,1,25,0)
+        <string>string</string>
+"DATA",175.101,2,1,26,0)
+      </proposedMedications>
+"DATA",175.101,2,1,27,0)
+      <drugStandardType>string</drugStandardType>
+"DATA",175.101,2,1,28,0)
+    </DrugDrugInteraction>
+"DATA",175.101,2,2,0)
+^^48^48^3090303^
+"DATA",175.101,2,2,1,0)
+ <DrugDrugInteractionResponse 
+"DATA",175.101,2,2,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,2,2,3,0)
+      <DrugDrugInteractionResult>
+"DATA",175.101,2,2,4,0)
+        <result>
+"DATA",175.101,2,2,5,0)
+          <Status>Unknown or OK or Fail or NotFound</Status>
+"DATA",175.101,2,2,6,0)
+          <Message>string</Message>
+"DATA",175.101,2,2,7,0)
+          <XmlResponse>string</XmlResponse>
+"DATA",175.101,2,2,8,0)
+          <RowCount>int</RowCount>
+"DATA",175.101,2,2,9,0)
+          <Timing>int</Timing>
+"DATA",175.101,2,2,10,0)
+        </result>
+"DATA",175.101,2,2,11,0)
+        <drugInteractionArray>
+"DATA",175.101,2,2,12,0)
+          <DrugInteraction>
+"DATA",175.101,2,2,13,0)
+            <MechanismOfAction>string</MechanismOfAction>
+"DATA",175.101,2,2,14,0)
+            <Discussion>string</Discussion>
+"DATA",175.101,2,2,15,0)
+            <ClinicalEffects>string</ClinicalEffects>
+"DATA",175.101,2,2,16,0)
+            <SeverityLevel>string</SeverityLevel>
+"DATA",175.101,2,2,17,0)
+            <PatientManagement>string</PatientManagement>
+"DATA",175.101,2,2,18,0)
+            <PredisposingFactors>string</PredisposingFactors>
+"DATA",175.101,2,2,19,0)
+            <References>string</References>
+"DATA",175.101,2,2,20,0)
+            <MonographTitle>string</MonographTitle>
+"DATA",175.101,2,2,21,0)
+            <Drug1>string</Drug1>
+"DATA",175.101,2,2,22,0)
+            <Drug1ID>string</Drug1ID>
+"DATA",175.101,2,2,23,0)
+            <Drug1Type>string</Drug1Type>
+"DATA",175.101,2,2,24,0)
+            <Drug2>string</Drug2>
+"DATA",175.101,2,2,25,0)
+            <Drug2ID>string</Drug2ID>
+"DATA",175.101,2,2,26,0)
+            <Drug2Type>string</Drug2Type>
+"DATA",175.101,2,2,27,0)
+            <Performance>string</Performance>
+"DATA",175.101,2,2,28,0)
+          </DrugInteraction>
+"DATA",175.101,2,2,29,0)
+          <DrugInteraction>
+"DATA",175.101,2,2,30,0)
+            <MechanismOfAction>string</MechanismOfAction>
+"DATA",175.101,2,2,31,0)
+            <Discussion>string</Discussion>
+"DATA",175.101,2,2,32,0)
+            <ClinicalEffects>string</ClinicalEffects>
+"DATA",175.101,2,2,33,0)
+            <SeverityLevel>string</SeverityLevel>
+"DATA",175.101,2,2,34,0)
+            <PatientManagement>string</PatientManagement>
+"DATA",175.101,2,2,35,0)
+            <PredisposingFactors>string</PredisposingFactors>
+"DATA",175.101,2,2,36,0)
+            <References>string</References>
+"DATA",175.101,2,2,37,0)
+            <MonographTitle>string</MonographTitle>
+"DATA",175.101,2,2,38,0)
+            <Drug1>string</Drug1>
+"DATA",175.101,2,2,39,0)
+            <Drug1ID>string</Drug1ID>
+"DATA",175.101,2,2,40,0)
+            <Drug1Type>string</Drug1Type>
+"DATA",175.101,2,2,41,0)
+            <Drug2>string</Drug2>
+"DATA",175.101,2,2,42,0)
+            <Drug2ID>string</Drug2ID>
+"DATA",175.101,2,2,43,0)
+            <Drug2Type>string</Drug2Type>
+"DATA",175.101,2,2,44,0)
+            <Performance>string</Performance>
+"DATA",175.101,2,2,45,0)
+          </DrugInteraction>
+"DATA",175.101,2,2,46,0)
+        </drugInteractionArray>
+"DATA",175.101,2,2,47,0)
+      </DrugDrugInteractionResult>
+"DATA",175.101,2,2,48,0)
+    </DrugDrugInteractionResponse>
+"DATA",175.101,3,0)
+DrugFoodInteraction^https://secure.newcropaccounts.com/V7/webservices/DrugFoodInteraction
+"DATA",175.101,3,1,0)
+^^14^14^3090303^
+"DATA",175.101,3,1,1,0)
+<DrugFoodInteraction 
+"DATA",175.101,3,1,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,3,1,3,0)
+      <credentials>
+"DATA",175.101,3,1,4,0)
+        <PartnerName>string</PartnerName>
+"DATA",175.101,3,1,5,0)
+        <Name>string</Name>
+"DATA",175.101,3,1,6,0)
+        <Password>string</Password>
+"DATA",175.101,3,1,7,0)
+      </credentials>
+"DATA",175.101,3,1,8,0)
+      <accountRequest>
+"DATA",175.101,3,1,9,0)
+        <AccountId>string</AccountId>
+"DATA",175.101,3,1,10,0)
+        <SiteId>string</SiteId>
+"DATA",175.101,3,1,11,0)
+      </accountRequest>
+"DATA",175.101,3,1,12,0)
+      <drugId>string</drugId>
+"DATA",175.101,3,1,13,0)
+      <drugStandardType>string</drugStandardType>
+"DATA",175.101,3,1,14,0)
+    </DrugFoodInteraction>
+"DATA",175.101,3,2,0)
+^^32^32^3090303^
+"DATA",175.101,3,2,1,0)
+<DrugFoodInteractionResponse 
+"DATA",175.101,3,2,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,3,2,3,0)
+      <DrugFoodInteractionResult>
+"DATA",175.101,3,2,4,0)
+        <result>
+"DATA",175.101,3,2,5,0)
+          <Status>Unknown or OK or Fail or NotFound</Status>
+"DATA",175.101,3,2,6,0)
+          <Message>string</Message>
+"DATA",175.101,3,2,7,0)
+          <XmlResponse>string</XmlResponse>
+"DATA",175.101,3,2,8,0)
+          <RowCount>int</RowCount>
+"DATA",175.101,3,2,9,0)
+          <Timing>int</Timing>
+"DATA",175.101,3,2,10,0)
+        </result>
+"DATA",175.101,3,2,11,0)
+        <drugFoodDetailArray>
+"DATA",175.101,3,2,12,0)
+          <DrugFoodDetail>
+"DATA",175.101,3,2,13,0)
+            <DataProvider>string</DataProvider>
+"DATA",175.101,3,2,14,0)
+            <DrugID>string</DrugID>
+"DATA",175.101,3,2,15,0)
+            <DrugName>string</DrugName>
+"DATA",175.101,3,2,16,0)
+            <SeverityLevel>string</SeverityLevel>
+"DATA",175.101,3,2,17,0)
+            <Result>string</Result>
+"DATA",175.101,3,2,18,0)
+            <Line1>string</Line1>
+"DATA",175.101,3,2,19,0)
+            <Line2>string</Line2>
+"DATA",175.101,3,2,20,0)
+          </DrugFoodDetail>
+"DATA",175.101,3,2,21,0)
+          <DrugFoodDetail>
+"DATA",175.101,3,2,22,0)
+            <DataProvider>string</DataProvider>
+"DATA",175.101,3,2,23,0)
+            <DrugID>string</DrugID>
+"DATA",175.101,3,2,24,0)
+            <DrugName>string</DrugName>
+"DATA",175.101,3,2,25,0)
+            <SeverityLevel>string</SeverityLevel>
+"DATA",175.101,3,2,26,0)
+            <Result>string</Result>
+"DATA",175.101,3,2,27,0)
+            <Line1>string</Line1>
+"DATA",175.101,3,2,28,0)
+            <Line2>string</Line2>
+"DATA",175.101,3,2,29,0)
+          </DrugFoodDetail>
+"DATA",175.101,3,2,30,0)
+        </drugFoodDetailArray>
+"DATA",175.101,3,2,31,0)
+      </DrugFoodInteractionResult>
+"DATA",175.101,3,2,32,0)
+    </DrugFoodInteractionResponse>
+"DATA",175.101,4,0)
+DrugSearchWithFormulary^https://secure.newcropaccounts.com/V7/webservices/DrugSearchWithFormulary
+"DATA",175.101,4,1,0)
+^^26^26^3090303^
+"DATA",175.101,4,1,1,0)
+<DrugSearchWithFormulary 
+"DATA",175.101,4,1,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,4,1,3,0)
+      <credentials>
+"DATA",175.101,4,1,4,0)
+        <PartnerName>string</PartnerName>
+"DATA",175.101,4,1,5,0)
+        <Name>string</Name>
+"DATA",175.101,4,1,6,0)
+        <Password>string</Password>
+"DATA",175.101,4,1,7,0)
+      </credentials>
+"DATA",175.101,4,1,8,0)
+      <accountRequest>
+"DATA",175.101,4,1,9,0)
+        <AccountId>string</AccountId>
+"DATA",175.101,4,1,10,0)
+        <SiteId>string</SiteId>
+"DATA",175.101,4,1,11,0)
+      </accountRequest>
+"DATA",175.101,4,1,12,0)
+      <patientRequest>
+"DATA",175.101,4,1,13,0)
+        <PatientId>string</PatientId>
+"DATA",175.101,4,1,14,0)
+      </patientRequest>
+"DATA",175.101,4,1,15,0)
+      <patientInformationRequester>
+"DATA",175.101,4,1,16,0)
+        <UserType>string</UserType>
+"DATA",175.101,4,1,17,0)
+        <UserId>string</UserId>
+"DATA",175.101,4,1,18,0)
+      </patientInformationRequester>
+"DATA",175.101,4,1,19,0)
+      <healthplanID>string</healthplanID>
+"DATA",175.101,4,1,20,0)
+      <healthplanTypeID>string</healthplanTypeID>
+"DATA",175.101,4,1,21,0)
+      <drugName>string</drugName>
+"DATA",175.101,4,1,22,0)
+      <includeObsolete>string</includeObsolete>
+"DATA",175.101,4,1,23,0)
+      <searchBrandGeneric>string</searchBrandGeneric>
+"DATA",175.101,4,1,24,0)
+      <searchRxOTC>string</searchRxOTC>
+"DATA",175.101,4,1,25,0)
+      <searchDrugSupply>string</searchDrugSupply>
+"DATA",175.101,4,1,26,0)
+    </DrugSearchWithFormulary>
+"DATA",175.101,4,2,0)
+^^22^22^3090303^
+"DATA",175.101,4,2,1,0)
+<DrugSearchWithFormularyResponse 
+"DATA",175.101,4,2,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,4,2,3,0)
+      <DrugSearchWithFormularyResult>
+"DATA",175.101,4,2,4,0)
+        <result>
+"DATA",175.101,4,2,5,0)
+          <Status>Unknown or OK or Fail or NotFound</Status>
+"DATA",175.101,4,2,6,0)
+          <Message>string</Message>
+"DATA",175.101,4,2,7,0)
+          <XmlResponse>string</XmlResponse>
+"DATA",175.101,4,2,8,0)
+          <RowCount>int</RowCount>
+"DATA",175.101,4,2,9,0)
+          <Timing>int</Timing>
+"DATA",175.101,4,2,10,0)
+        </result>
+"DATA",175.101,4,2,11,0)
+        <drugFormularyDetailArray>
+"DATA",175.101,4,2,12,0)
+          <DrugFormularyDetail>
+"DATA",175.101,4,2,13,0)
+            <drugDetail xsi:nil="true" />
+"DATA",175.101,4,2,14,0)
+            <formularyCoverage>string</formularyCoverage>
+"DATA",175.101,4,2,15,0)
+          </DrugFormularyDetail>
+"DATA",175.101,4,2,16,0)
+          <DrugFormularyDetail>
+"DATA",175.101,4,2,17,0)
+            <drugDetail xsi:nil="true" />
+"DATA",175.101,4,2,18,0)
+            <formularyCoverage>string</formularyCoverage>
+"DATA",175.101,4,2,19,0)
+          </DrugFormularyDetail>
+"DATA",175.101,4,2,20,0)
+        </drugFormularyDetailArray>
+"DATA",175.101,4,2,21,0)
+      </DrugSearchWithFormularyResult>
+"DATA",175.101,4,2,22,0)
+    </DrugSearchWithFormularyResponse>
+"DATA",175.101,5,0)
+DrugsByDiagnosis^https://secure.newcropaccounts.com/V7/webservices/DrugsByDiagnosis
+"DATA",175.101,5,1,0)
+^^24^24^3090303^
+"DATA",175.101,5,1,1,0)
+<DrugsByDiagnosis 
+"DATA",175.101,5,1,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,5,1,3,0)
+      <credentials>
+"DATA",175.101,5,1,4,0)
+        <PartnerName>string</PartnerName>
+"DATA",175.101,5,1,5,0)
+        <Name>string</Name>
+"DATA",175.101,5,1,6,0)
+        <Password>string</Password>
+"DATA",175.101,5,1,7,0)
+      </credentials>
+"DATA",175.101,5,1,8,0)
+      <accountRequest>
+"DATA",175.101,5,1,9,0)
+        <AccountId>string</AccountId>
+"DATA",175.101,5,1,10,0)
+        <SiteId>string</SiteId>
+"DATA",175.101,5,1,11,0)
+      </accountRequest>
+"DATA",175.101,5,1,12,0)
+      <patientRequest>
+"DATA",175.101,5,1,13,0)
+        <PatientId>string</PatientId>
+"DATA",175.101,5,1,14,0)
+      </patientRequest>
+"DATA",175.101,5,1,15,0)
+      <patientInformationRequester>
+"DATA",175.101,5,1,16,0)
+        <UserType>string</UserType>
+"DATA",175.101,5,1,17,0)
+        <UserId>string</UserId>
+"DATA",175.101,5,1,18,0)
+      </patientInformationRequester>
+"DATA",175.101,5,1,19,0)
+      <diagnosisList>
+"DATA",175.101,5,1,20,0)
+        <string>string</string>
+"DATA",175.101,5,1,21,0)
+        <string>string</string>
+"DATA",175.101,5,1,22,0)
+      </diagnosisList>
+"DATA",175.101,5,1,23,0)
+      <diagnosisListType>string</diagnosisListType>
+"DATA",175.101,5,1,24,0)
+    </DrugsByDiagnosis>
+"DATA",175.101,5,2,0)
+^^56^56^3090303^
+"DATA",175.101,5,2,1,0)
+<DrugsByDiagnosisResponse 
+"DATA",175.101,5,2,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,5,2,3,0)
+      <DrugsByDiagnosisResult>
+"DATA",175.101,5,2,4,0)
+        <result>
+"DATA",175.101,5,2,5,0)
+          <Status>Unknown or OK or Fail or NotFound</Status>
+"DATA",175.101,5,2,6,0)
+          <Message>string</Message>
+"DATA",175.101,5,2,7,0)
+          <XmlResponse>string</XmlResponse>
+"DATA",175.101,5,2,8,0)
+          <RowCount>int</RowCount>
+"DATA",175.101,5,2,9,0)
+          <Timing>int</Timing>
+"DATA",175.101,5,2,10,0)
+        </result>
+"DATA",175.101,5,2,11,0)
+        <drugDetailArray>
+"DATA",175.101,5,2,12,0)
+          <DrugDetail>
+"DATA",175.101,5,2,13,0)
+            <DataProvider>string</DataProvider>
+"DATA",175.101,5,2,14,0)
+            <Drug>string</Drug>
+"DATA",175.101,5,2,15,0)
+            <DrugID>string</DrugID>
+"DATA",175.101,5,2,16,0)
+            <DrugSubID1>string</DrugSubID1>
+"DATA",175.101,5,2,17,0)
+            <DrugName>string</DrugName>
+"DATA",175.101,5,2,18,0)
+            <DrugNameID>string</DrugNameID>
+"DATA",175.101,5,2,19,0)
+            <GenericName>string</GenericName>
+"DATA",175.101,5,2,20,0)
+            <DeaClassCode>string</DeaClassCode>
+"DATA",175.101,5,2,21,0)
+            <Dosage>string</Dosage>
+"DATA",175.101,5,2,22,0)
+            <DosageForm>string</DosageForm>
+"DATA",175.101,5,2,23,0)
+            <Route>string</Route>
+"DATA",175.101,5,2,24,0)
+            <Status>string</Status>
+"DATA",175.101,5,2,25,0)
+            <TherapeuticClass>string</TherapeuticClass>
+"DATA",175.101,5,2,26,0)
+            <DeaGenericNamedCode>string</DeaGenericNamedCode>
+"DATA",175.101,5,2,27,0)
+            
+"DATA",175.101,5,2,28,0)
+<DeaGenericNamedDescription>string</DeaGenericNamedDescription>
+"DATA",175.101,5,2,29,0)
+            <DeaLegendCode>string</DeaLegendCode>
+"DATA",175.101,5,2,30,0)
+            <DeaLegendDescription>string</DeaLegendDescription>
+"DATA",175.101,5,2,31,0)
+            <Touchdate>string</Touchdate>
+"DATA",175.101,5,2,32,0)
+          </DrugDetail>
+"DATA",175.101,5,2,33,0)
+          <DrugDetail>
+"DATA",175.101,5,2,34,0)
+            <DataProvider>string</DataProvider>
+"DATA",175.101,5,2,35,0)
+            <Drug>string</Drug>
+"DATA",175.101,5,2,36,0)
+            <DrugID>string</DrugID>
+"DATA",175.101,5,2,37,0)
+            <DrugSubID1>string</DrugSubID1>
+"DATA",175.101,5,2,38,0)
+            <DrugName>string</DrugName>
+"DATA",175.101,5,2,39,0)
+            <DrugNameID>string</DrugNameID>
+"DATA",175.101,5,2,40,0)
+            <GenericName>string</GenericName>
+"DATA",175.101,5,2,41,0)
+            <DeaClassCode>string</DeaClassCode>
+"DATA",175.101,5,2,42,0)
+            <Dosage>string</Dosage>
+"DATA",175.101,5,2,43,0)
+            <DosageForm>string</DosageForm>
+"DATA",175.101,5,2,44,0)
+            <Route>string</Route>
+"DATA",175.101,5,2,45,0)
+            <Status>string</Status>
+"DATA",175.101,5,2,46,0)
+            <TherapeuticClass>string</TherapeuticClass>
+"DATA",175.101,5,2,47,0)
+            <DeaGenericNamedCode>string</DeaGenericNamedCode>
+"DATA",175.101,5,2,48,0)
+            
+"DATA",175.101,5,2,49,0)
+<DeaGenericNamedDescription>string</DeaGenericNamedDescription>
+"DATA",175.101,5,2,50,0)
+            <DeaLegendCode>string</DeaLegendCode>
+"DATA",175.101,5,2,51,0)
+            <DeaLegendDescription>string</DeaLegendDescription>
+"DATA",175.101,5,2,52,0)
+            <Touchdate>string</Touchdate>
+"DATA",175.101,5,2,53,0)
+          </DrugDetail>
+"DATA",175.101,5,2,54,0)
+        </drugDetailArray>
+"DATA",175.101,5,2,55,0)
+      </DrugsByDiagnosisResult>
+"DATA",175.101,5,2,56,0)
+    </DrugsByDiagnosisResponse>
+"DATA",175.101,6,0)
+DrugsByDiagnosisWithFormulary^https://secure.newcropaccounts.com/V7/webservices/DrugsByDiagnosisWithFormulary
+"DATA",175.101,6,1,0)
+^^26^26^3090303^
+"DATA",175.101,6,1,1,0)
+<DrugsByDiagnosisWithFormulary 
+"DATA",175.101,6,1,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,6,1,3,0)
+      <credentials>
+"DATA",175.101,6,1,4,0)
+        <PartnerName>string</PartnerName>
+"DATA",175.101,6,1,5,0)
+        <Name>string</Name>
+"DATA",175.101,6,1,6,0)
+        <Password>string</Password>
+"DATA",175.101,6,1,7,0)
+      </credentials>
+"DATA",175.101,6,1,8,0)
+      <accountRequest>
+"DATA",175.101,6,1,9,0)
+        <AccountId>string</AccountId>
+"DATA",175.101,6,1,10,0)
+        <SiteId>string</SiteId>
+"DATA",175.101,6,1,11,0)
+      </accountRequest>
+"DATA",175.101,6,1,12,0)
+      <patientRequest>
+"DATA",175.101,6,1,13,0)
+        <PatientId>string</PatientId>
+"DATA",175.101,6,1,14,0)
+      </patientRequest>
+"DATA",175.101,6,1,15,0)
+      <patientInformationRequester>
+"DATA",175.101,6,1,16,0)
+        <UserType>string</UserType>
+"DATA",175.101,6,1,17,0)
+        <UserId>string</UserId>
+"DATA",175.101,6,1,18,0)
+      </patientInformationRequester>
+"DATA",175.101,6,1,19,0)
+      <healthplanID>string</healthplanID>
+"DATA",175.101,6,1,20,0)
+      <healthplanTypeID>string</healthplanTypeID>
+"DATA",175.101,6,1,21,0)
+      <diagnosisList>
+"DATA",175.101,6,1,22,0)
+        <string>string</string>
+"DATA",175.101,6,1,23,0)
+        <string>string</string>
+"DATA",175.101,6,1,24,0)
+      </diagnosisList>
+"DATA",175.101,6,1,25,0)
+      <diagnosisListType>string</diagnosisListType>
+"DATA",175.101,6,1,26,0)
+    </DrugsByDiagnosisWithFormulary>
+"DATA",175.101,6,2,0)
+^^22^22^3090303^
+"DATA",175.101,6,2,1,0)
+<DrugsByDiagnosisWithFormularyResponse 
+"DATA",175.101,6,2,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,6,2,3,0)
+      <DrugsByDiagnosisWithFormularyResult>
+"DATA",175.101,6,2,4,0)
+        <result>
+"DATA",175.101,6,2,5,0)
+          <Status>Unknown or OK or Fail or NotFound</Status>
+"DATA",175.101,6,2,6,0)
+          <Message>string</Message>
+"DATA",175.101,6,2,7,0)
+          <XmlResponse>string</XmlResponse>
+"DATA",175.101,6,2,8,0)
+          <RowCount>int</RowCount>
+"DATA",175.101,6,2,9,0)
+          <Timing>int</Timing>
+"DATA",175.101,6,2,10,0)
+        </result>
+"DATA",175.101,6,2,11,0)
+        <drugFormularyDetailArray>
+"DATA",175.101,6,2,12,0)
+          <DrugFormularyDetail>
+"DATA",175.101,6,2,13,0)
+            <drugDetail xsi:nil="true" />
+"DATA",175.101,6,2,14,0)
+            <formularyCoverage>string</formularyCoverage>
+"DATA",175.101,6,2,15,0)
+          </DrugFormularyDetail>
+"DATA",175.101,6,2,16,0)
+          <DrugFormularyDetail>
+"DATA",175.101,6,2,17,0)
+            <drugDetail xsi:nil="true" />
+"DATA",175.101,6,2,18,0)
+            <formularyCoverage>string</formularyCoverage>
+"DATA",175.101,6,2,19,0)
+          </DrugFormularyDetail>
+"DATA",175.101,6,2,20,0)
+        </drugFormularyDetailArray>
+"DATA",175.101,6,2,21,0)
+      </DrugsByDiagnosisWithFormularyResult>
+"DATA",175.101,6,2,22,0)
+    </DrugsByDiagnosisWithFormularyResponse>
+"DATA",175.101,7,0)
+ValidateNDCList^https://secure.newcropaccounts.com/V7/webservices/ValidateNDCList
+"DATA",175.101,7,1,0)
+^^13^13^3090303^
+"DATA",175.101,7,1,1,0)
+<ValidateNDCList 
+"DATA",175.101,7,1,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,7,1,3,0)
+      <credentials>
+"DATA",175.101,7,1,4,0)
+        <PartnerName>string</PartnerName>
+"DATA",175.101,7,1,5,0)
+        <Name>string</Name>
+"DATA",175.101,7,1,6,0)
+        <Password>string</Password>
+"DATA",175.101,7,1,7,0)
+      </credentials>
+"DATA",175.101,7,1,8,0)
+      <ndcList>
+"DATA",175.101,7,1,9,0)
+        <string>string</string>
+"DATA",175.101,7,1,10,0)
+        <string>string</string>
+"DATA",175.101,7,1,11,0)
+      </ndcList>
+"DATA",175.101,7,1,12,0)
+      <drugStandardType>string</drugStandardType>
+"DATA",175.101,7,1,13,0)
+    </ValidateNDCList>
+"DATA",175.101,7,2,0)
+^^22^22^3090303^
+"DATA",175.101,7,2,1,0)
+<ValidateNDCListResponse 
+"DATA",175.101,7,2,2,0)
+xmlns="https://secure.newcropaccounts.com/V7/webservices">
+"DATA",175.101,7,2,3,0)
+      <ValidateNDCListResult>
+"DATA",175.101,7,2,4,0)
+        <result>
+"DATA",175.101,7,2,5,0)
+          <Status>Unknown or OK or Fail or NotFound</Status>
+"DATA",175.101,7,2,6,0)
+          <Message>string</Message>
+"DATA",175.101,7,2,7,0)
+          <XmlResponse>string</XmlResponse>
+"DATA",175.101,7,2,8,0)
+          <RowCount>int</RowCount>
+"DATA",175.101,7,2,9,0)
+          <Timing>int</Timing>
+"DATA",175.101,7,2,10,0)
+        </result>
+"DATA",175.101,7,2,11,0)
+        <ndcValidationDetailArray>
+"DATA",175.101,7,2,12,0)
+          <NDCValidationDetail>
+"DATA",175.101,7,2,13,0)
+            <ndc>string</ndc>
+"DATA",175.101,7,2,14,0)
+            <ndcStatus>string</ndcStatus>
+"DATA",175.101,7,2,15,0)
+          </NDCValidationDetail>
+"DATA",175.101,7,2,16,0)
+          <NDCValidationDetail>
+"DATA",175.101,7,2,17,0)
+            <ndc>string</ndc>
+"DATA",175.101,7,2,18,0)
+            <ndcStatus>string</ndcStatus>
+"DATA",175.101,7,2,19,0)
+          </NDCValidationDetail>
+"DATA",175.101,7,2,20,0)
+        </ndcValidationDetailArray>
+"DATA",175.101,7,2,21,0)
+      </ValidateNDCListResult>
+"DATA",175.101,7,2,22,0)
+    </ValidateNDCListResponse>
+"DATA",175.201,2,0)
+EPRESCRIBING
+"DATA",175.201,2,1,0)
+^175.2011P^2^2
+"DATA",175.201,2,1,1,0)
+1^1
+"DATA",175.201,2,1,2,0)
+3^2
+"FIA",175.101)
+C0P APPLICATION STEPS
+"FIA",175.101,0)
+^C0PS(
+"FIA",175.101,0,0)
+175.101
+"FIA",175.101,0,1)
+y^y^f^^n^^y^o^n
+"FIA",175.101,0,10)
+
+"FIA",175.101,0,11)
+
+"FIA",175.101,0,"RLRO")
+
+"FIA",175.101,175.101)
+0
+"FIA",175.101,175.1012)
+0
+"FIA",175.101,175.1013)
+0
+"FIA",175.201)
+C0P WEB APPLICATIONS
+"FIA",175.201,0)
+^C0PAPP(
+"FIA",175.201,0,0)
+175.201
+"FIA",175.201,0,1)
+y^y^f^^n^^y^o^n
+"FIA",175.201,0,10)
+
+"FIA",175.201,0,11)
+
+"FIA",175.201,0,"RLRO")
+
+"FIA",175.201,175.201)
+0
+"FIA",175.201,175.2011)
+0
+"MBREQ")
+0
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"RTN")
+2
+"RTN","C0PEWD1")
+0^1^B8658372
+"RTN","C0PEWD1",1,0)
+C0CEWD1   ; CCDCCR/GPL - CCR FILEMAN utilities; 12/6/08
+"RTN","C0PEWD1",2,0)
+ ;;0.1;CCDCCR;nopatch;noreleasedate;Build 1
+"RTN","C0PEWD1",3,0)
+ ;Copyright 2008 WorldVistA.  Licensed under the terms of the GNU
+"RTN","C0PEWD1",4,0)
+ ;General Public License See attached copy of the License.
+"RTN","C0PEWD1",5,0)
+ ;
+"RTN","C0PEWD1",6,0)
+ ;This program is free software; you can redistribute it and/or modify
+"RTN","C0PEWD1",7,0)
+ ;it under the terms of the GNU General Public License as published by
+"RTN","C0PEWD1",8,0)
+ ;the Free Software Foundation; either version 2 of the License, or
+"RTN","C0PEWD1",9,0)
+ ;(at your option) any later version.
+"RTN","C0PEWD1",10,0)
+ ;
+"RTN","C0PEWD1",11,0)
+ ;This program is distributed in the hope that it will be useful,
+"RTN","C0PEWD1",12,0)
+ ;but WITHOUT ANY WARRANTY; without even the implied warranty of
+"RTN","C0PEWD1",13,0)
+ ;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+"RTN","C0PEWD1",14,0)
+ ;GNU General Public License for more details.
+"RTN","C0PEWD1",15,0)
+ ;
+"RTN","C0PEWD1",16,0)
+ ;You should have received a copy of the GNU General Public License along
+"RTN","C0PEWD1",17,0)
+ ;with this program; if not, write to the Free Software Foundation, Inc.,
+"RTN","C0PEWD1",18,0)
+ ;51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+"RTN","C0PEWD1",19,0)
+ ;
+"RTN","C0PEWD1",20,0)
+ Q
+"RTN","C0PEWD1",21,0)
+ ;TEST(filepath) ; filepath IS THE PATH/FILE TO BE READ IN
+"RTN","C0PEWD1",22,0)
+ i $g(^%ZISH)["" d  ; if the VistA Kernal routine %ZISH exists
+"RTN","C0PEWD1",23,0)
+ . n zfile,zpath,ztmp s (zfile,zpath,ztmp)=""
+"RTN","C0PEWD1",24,0)
+ . s zfile=$re($p($re(filepath),"/",1)) ;file name
+"RTN","C0PEWD1",25,0)
+ . s zpath=$p(filepath,zfile,1) ; file path
+"RTN","C0PEWD1",26,0)
+ . s ztmp=$na(^CacheTempEWD($j,0))
+"RTN","C0PEWD1",27,0)
+ . s ok=$$FTG^%ZISH(zpath,zfile,ztmp,2) ; import the file incrementing subscr 2
+"RTN","C0PEWD1",28,0)
+ q
+"RTN","C0PEWD1",29,0)
+ ;
+"RTN","C0PEWD1",30,0)
+TEST2 ;
+"RTN","C0PEWD1",31,0)
+ s zfilepath="/home/vademo2/CCR/PAT_780_CCR_V1_0_17.xml"
+"RTN","C0PEWD1",32,0)
+ ;s ok=$$gtmImportFile^%zewdHTMLParser(zfilepath)
+"RTN","C0PEWD1",33,0)
+ s ok=$$LOAD(zfilepath) ;load the XML file to the EWD global
+"RTN","C0PEWD1",34,0)
+ s ok=$$parseDocument^%zewdHTMLParser("DerekDOM",0)
+"RTN","C0PEWD1",35,0)
+ ;s ok=$$parseXMLFile^%zewdAPI(zfilepath,"fourthDOM")
+"RTN","C0PEWD1",36,0)
+ w ok,!
+"RTN","C0PEWD1",37,0)
+ q
+"RTN","C0PEWD1",38,0)
+ ;
+"RTN","C0PEWD1",39,0)
+GPLTEST ;
+"RTN","C0PEWD1",40,0)
+ ;s ok=$$httpGET^%zewdGTM("http://preproduction.newcropaccounts.com/InterfaceV7/NewrxFDB.xml",.gpl)
+"RTN","C0PEWD1",41,0)
+ s URL="https://trac.opensourcevista.net/CCD-CCR-Project/browser/ccr/tags/CCR_1_0_7/output"
+"RTN","C0PEWD1",42,0)
+ s ok=$$httpGET^%zewdGTM(URL,.gpl)
+"RTN","C0PEWD1",43,0)
+ S ZG=""
+"RTN","C0PEWD1",44,0)
+ F  S ZG=$O(gpl(ZG)) Q:ZG=""  D  ;
+"RTN","C0PEWD1",45,0)
+ . s gpl(ZG)=$$CLEAN^C0PEWDU(gpl(ZG)) ;
+"RTN","C0PEWD1",46,0)
+ . ;w gpl(ZG)
+"RTN","C0PEWD1",47,0)
+ m ^CacheTempEWD($j)=gpl
+"RTN","C0PEWD1",48,0)
+ b
+"RTN","C0PEWD1",49,0)
+ s ok=$$parseDocument^%zewdHTMLParser("gpl2",0)
+"RTN","C0PEWD1",50,0)
+ s ok=$$outputDOM^%zewdDOM("gpl2",1,1)
+"RTN","C0PEWD1",51,0)
+ Q
+"RTN","C0PEWD1",52,0)
+ ;
+"RTN","C0PEWD1",53,0)
+CLEAN(INX) ;DELETE NON-PRINTING CHARACTER IN INX, PASSED BY VALUE
+"RTN","C0PEWD1",54,0)
+ ;DON'T USE THIS -- IT DOESN'T WORK -- USE $$CLEAN^C0PEWDU
+"RTN","C0PEWD1",55,0)
+ ;N ZT,ZI
+"RTN","C0PEWD1",56,0)
+ S ZT=""
+"RTN","C0PEWD1",57,0)
+ F ZI=32:1:126 S ZT=ZT_$CHAR(ZI)
+"RTN","C0PEWD1",58,0)
+ S ZZ=$TR(INX,ZT)
+"RTN","C0PEWD1",59,0)
+ Q ZZ
+"RTN","C0PEWD1",60,0)
+ ;
+"RTN","C0PEWD1",61,0)
+LOAD(filepath) ; load an xml file into the EWD global for DOM processing
+"RTN","C0PEWD1",62,0)
+ ; need to call s error=$$parseDocument^%zewdHTMLParser(docName,isHTML)
+"RTN","C0PEWD1",63,0)
+ ; after to process it to the DOM - isHTML=0 for XML files
+"RTN","C0PEWD1",64,0)
+ n i
+"RTN","C0PEWD1",65,0)
+ i $g(^%ZISH)["" d  QUIT i ; if VistA Kernal routine %ZISH exists - gpl 2/23/09
+"RTN","C0PEWD1",66,0)
+ . n zfile,zpath,ztmp,zok s (zfile,zpath,ztmp)=""
+"RTN","C0PEWD1",67,0)
+ . s zfile=$re($p($re(filepath),"/",1)) ;file name
+"RTN","C0PEWD1",68,0)
+ . s zpath=$p(filepath,zfile,1) ; file path
+"RTN","C0PEWD1",69,0)
+ . s ztmp=$na(^CacheTempEWD($j,0))
+"RTN","C0PEWD1",70,0)
+ . s zok=$$FTG^%ZISH(zpath,zfile,ztmp,2) ; import the file increment subscr 2
+"RTN","C0PEWD1",71,0)
+ . s i=$o(^CacheTempEWD($j,""),-1) ; highest line number
+"RTN","C0PEWD1",72,0)
+ q i
+"RTN","C0PEWD1",73,0)
+ ;
+"RTN","C0PEWD1",74,0)
+Q(ZQ,ZD) ; SEND QUERY ZQ TO DOM ZD AND DIPLAY NODES RETURNED
+"RTN","C0PEWD1",75,0)
+ I '$D(ZD) S ZD="DerekDOM"
+"RTN","C0PEWD1",76,0)
+ s error=$$select^%zewdXPath(ZQ,ZD,.nodes) ;
+"RTN","C0PEWD1",77,0)
+ d displayNodes^%zewdXPath(.nodes)
+"RTN","C0PEWD1",78,0)
+ q
+"RTN","C0PEWD1",79,0)
+ ;
+"RTN","C0PEWDU")
+0^2^B1881609
+"RTN","C0PEWDU",1,0)
+C0PEWDU ; WV/SMH - E-prescription utilities; Mar 3 2009
+"RTN","C0PEWDU",2,0)
+ ;;0.1;WV EPrescribing;;;Build 1
+"RTN","C0PEWDU",3,0)
+ Q
+"RTN","C0PEWDU",4,0)
+ ;
+"RTN","C0PEWDU",5,0)
+CLEAN(STR) ; extrinsic function; returns string
+"RTN","C0PEWDU",6,0)
+ ;; Removes all non printable characters from a string.
+"RTN","C0PEWDU",7,0)
+ ;; STR by Value
+"RTN","C0PEWDU",8,0)
+ N TR,I
+"RTN","C0PEWDU",9,0)
+ F I=0:1:31 S TR=$G(TR)_$C(I)
+"RTN","C0PEWDU",10,0)
+ S TR=TR_$C(127)
+"RTN","C0PEWDU",11,0)
+ QUIT $TR(STR,TR)
+"RTN","C0PEWDU",12,0)
+ ;
+"RTN","C0PEWDU",13,0)
+GETSOAP(ENTRY,REQUEST,RESULT) ; XML SOAP Spec for NewCrop
+"RTN","C0PEWDU",14,0)
+ ;; Gets world processing field from Fileman for Parsing
+"RTN","C0PEWDU",15,0)
+ ;; ENTRY Input by Value
+"RTN","C0PEWDU",16,0)
+ ;; REQUEST XML Output by Reference
+"RTN","C0PEWDU",17,0)
+ ;; RESULT XML Output by Reference
+"RTN","C0PEWDU",18,0)
+ ;; Example call: D GETSOAP^C0PEWDU("DrugAllergyInteraction",.REQ,.RES)
+"RTN","C0PEWDU",19,0)
+ ;
+"RTN","C0PEWDU",20,0)
+ N OK,ERR,IEN,F  ; if call is okay, Error, IEN, File
+"RTN","C0PEWDU",21,0)
+ S F=175.101
+"RTN","C0PEWDU",22,0)
+ S IEN=$$FIND1^DIC(F,"","",ENTRY,"B")
+"RTN","C0PEWDU",23,0)
+ S OK=$$GET1^DIQ(F,IEN,2,"","REQUEST","ERR")
+"RTN","C0PEWDU",24,0)
+ I OK=""!($D(ERR)) S REQUEST=""
+"RTN","C0PEWDU",25,0)
+ ; M ^CacheTempEWD($j)=REQUEST
+"RTN","C0PEWDU",26,0)
+ ; K REQUEST
+"RTN","C0PEWDU",27,0)
+ ; S ok=$$parseDocument^%zewdHTMLParser("REQUEST",0)
+"RTN","C0PEWDU",28,0)
+ ; S ok=$$outputDOM^%zewdDOM("REQUEST",1,1)
+"RTN","C0PEWDU",29,0)
+ ; Q  ; remove later
+"RTN","C0PEWDU",30,0)
+ K OK,ERR
+"RTN","C0PEWDU",31,0)
+ S OK=$$GET1^DIQ(F,IEN,3,"","RESULT","ERR")
+"RTN","C0PEWDU",32,0)
+ I OK=""!($D(ERR)) S RESULT=""
+"RTN","C0PEWDU",33,0)
+ QUIT
+"RTN","C0PEWDU",34,0)
+ ;
+"SEC","^DIC",175.101,175.101,0,"AUDIT")
+@
+"SEC","^DIC",175.101,175.101,0,"DD")
+@
+"SEC","^DIC",175.101,175.101,0,"DEL")
+@
+"SEC","^DIC",175.101,175.101,0,"LAYGO")
+@
+"SEC","^DIC",175.101,175.101,0,"RD")
+@
+"SEC","^DIC",175.101,175.101,0,"WR")
+@
+"SEC","^DIC",175.201,175.201,0,"AUDIT")
+@
+"SEC","^DIC",175.201,175.201,0,"DD")
+@
+"SEC","^DIC",175.201,175.201,0,"DEL")
+@
+"SEC","^DIC",175.201,175.201,0,"LAYGO")
+@
+"SEC","^DIC",175.201,175.201,0,"RD")
+@
+"SEC","^DIC",175.201,175.201,0,"WR")
+@
+"VER")
+8.0^22.0
+"^DD",175.101,175.101,0)
+FIELD^^.05^5
+"^DD",175.101,175.101,0,"DDA")
+N
+"^DD",175.101,175.101,0,"DT")
+3090303
+"^DD",175.101,175.101,0,"IX","B",175.101,.01)
+
+"^DD",175.101,175.101,0,"NM","C0P APPLICATION STEPS")
+
+"^DD",175.101,175.101,0,"PT",175.2011,.01)
+
+"^DD",175.101,175.101,.01,0)
+STEP NAME^RF^^0;1^K:$L(X)>30!(X?.N)!($L(X)<3)!'(X'?1P.E) X
+"^DD",175.101,175.101,.01,.1)
+APPLICATION STEP NAME
+"^DD",175.101,175.101,.01,1,0)
+^.1
+"^DD",175.101,175.101,.01,1,1,0)
+175.101^B
+"^DD",175.101,175.101,.01,1,1,1)
+S ^C0PS("B",$E(X,1,30),DA)=""
+"^DD",175.101,175.101,.01,1,1,2)
+K ^C0PS("B",$E(X,1,30),DA)
+"^DD",175.101,175.101,.01,3)
+APPLICATION STEP NAME
+"^DD",175.101,175.101,.01,"DT")
+3090303
+"^DD",175.101,175.101,.05,0)
+SEQUENCE^NJ9,0^^3;1^K:+X'=X!(X>999999999)!(X<1)!(X?.E1"."1.N) X
+"^DD",175.101,175.101,.05,.1)
+STEP SEQUENCE NUMBER
+"^DD",175.101,175.101,.05,3)
+STEP SEQUENCE NUMBER
+"^DD",175.101,175.101,.05,"DT")
+3090303
+"^DD",175.101,175.101,1,0)
+URL^F^^0;2^K:$L(X)>200!($L(X)<1) X
+"^DD",175.101,175.101,1,.1)
+URL OF WEB SERVICE
+"^DD",175.101,175.101,1,3)
+URL OF WEB SERVICE
+"^DD",175.101,175.101,1,"DT")
+3090303
+"^DD",175.101,175.101,2,0)
+REQUEST XML^175.1012^^1;0
+"^DD",175.101,175.101,3,0)
+RESPONSE XML^175.1013^^2;0
+"^DD",175.101,175.1012,0)
+REQUEST XML SUB-FIELD^^.01^1
+"^DD",175.101,175.1012,0,"DT")
+3090303
+"^DD",175.101,175.1012,0,"NM","REQUEST XML")
+
+"^DD",175.101,175.1012,0,"UP")
+175.101
+"^DD",175.101,175.1012,.01,0)
+REQUEST XML^Wx^^0;1
+"^DD",175.101,175.1012,.01,.1)
+REQUEST XML FOR THIS WEB SERVICE STEP
+"^DD",175.101,175.1012,.01,3)
+REQUEST XML FOR THIS WEB SERVICE STEP
+"^DD",175.101,175.1012,.01,"DT")
+3090303
+"^DD",175.101,175.1013,0)
+RESPONSE XML SUB-FIELD^^.01^1
+"^DD",175.101,175.1013,0,"DT")
+3090303
+"^DD",175.101,175.1013,0,"NM","RESPONSE XML")
+
+"^DD",175.101,175.1013,0,"UP")
+175.101
+"^DD",175.101,175.1013,.01,0)
+RESPONSE XML^Wx^^0;1
+"^DD",175.101,175.1013,.01,.1)
+RESPONSE XML FOR THIS APPLICATION STEP
+"^DD",175.101,175.1013,.01,3)
+RESPONSE XML FOR THIS APPLICATION STEP
+"^DD",175.101,175.1013,.01,"DT")
+3090303
+"^DD",175.201,175.201,0)
+FIELD^^1^2
+"^DD",175.201,175.201,0,"DDA")
+N
+"^DD",175.201,175.201,0,"DT")
+3090303
+"^DD",175.201,175.201,0,"IX","B",175.201,.01)
+
+"^DD",175.201,175.201,0,"NM","C0P WEB APPLICATIONS")
+
+"^DD",175.201,175.201,.01,0)
+APPLICATION NAME^RF^^0;1^K:$L(X)>30!($L(X)<3)!'(X'?1P.E) X
+"^DD",175.201,175.201,.01,.1)
+WEB APPLICATION NAME
+"^DD",175.201,175.201,.01,1,0)
+^.1
+"^DD",175.201,175.201,.01,1,1,0)
+175.201^B
+"^DD",175.201,175.201,.01,1,1,1)
+S ^C0PAPP("B",$E(X,1,30),DA)=""
+"^DD",175.201,175.201,.01,1,1,2)
+K ^C0PAPP("B",$E(X,1,30),DA)
+"^DD",175.201,175.201,.01,3)
+APPLICATION NAME
+"^DD",175.201,175.201,.01,"DT")
+3090303
+"^DD",175.201,175.201,1,0)
+STEPS^175.2011P^^1;0
+"^DD",175.201,175.2011,0)
+STEPS SUB-FIELD^^1^2
+"^DD",175.201,175.2011,0,"DT")
+3090303
+"^DD",175.201,175.2011,0,"IX","B",175.2011,.01)
+
+"^DD",175.201,175.2011,0,"NM","STEPS")
+
+"^DD",175.201,175.2011,0,"UP")
+175.201
+"^DD",175.201,175.2011,.01,0)
+STEPS^MP175.101^C0PS(^0;1^Q
+"^DD",175.201,175.2011,.01,.1)
+APPLICATION STEPS
+"^DD",175.201,175.2011,.01,1,0)
+^.1
+"^DD",175.201,175.2011,.01,1,1,0)
+175.2011^B
+"^DD",175.201,175.2011,.01,1,1,1)
+S ^C0PAPP(DA(1),1,"B",$E(X,1,30),DA)=""
+"^DD",175.201,175.2011,.01,1,1,2)
+K ^C0PAPP(DA(1),1,"B",$E(X,1,30),DA)
+"^DD",175.201,175.2011,.01,3)
+APPLICATIONS STEPS
+"^DD",175.201,175.2011,.01,"DT")
+3090303
+"^DD",175.201,175.2011,1,0)
+SEQUENCE^NJ8,0^^0;2^K:+X'=X!(X>99999999)!(X<1)!(X?.E1"."1.N) X
+"^DD",175.201,175.2011,1,.1)
+STEP SEQUENCE
+"^DD",175.201,175.2011,1,3)
+STEP SEQUENCE
+"^DD",175.201,175.2011,1,"DT")
+3090303
+"^DIC",175.101,175.101,0)
+C0P APPLICATION STEPS^175.101
+"^DIC",175.101,175.101,0,"GL")
+^C0PS(
+"^DIC",175.101,175.101,"%",0)
+^1.005^^
+"^DIC",175.101,175.101,"%D",0)
+^^10^10^3090303^
+"^DIC",175.101,175.101,"%D",1,0)
+This file is being built to support the ePrescribing project. It contains 
+"^DIC",175.101,175.101,"%D",2,0)
+application steps that are used in combination to retrieve information 
+"^DIC",175.101,175.101,"%D",3,0)
+from external web services, combine them, and store them in variables for 
+"^DIC",175.101,175.101,"%D",4,0)
+use in the Order Checking process. In addition, if external meds are 
+"^DIC",175.101,175.101,"%D",5,0)
+identified by the web services for a patient, they are saved to the CCR 
+"^DIC",175.101,175.101,"%D",6,0)
+ELEMENTS file and will be accessioned to the patient's record as "NON-VA" 
+"^DIC",175.101,175.101,"%D",7,0)
+meds.
+"^DIC",175.101,175.101,"%D",8,0)
+ 
+"^DIC",175.101,175.101,"%D",9,0)
+This prototype file was created by George Lilly during the RMU VistA 
+"^DIC",175.101,175.101,"%D",10,0)
+sprint March 3, 2009
+"^DIC",175.101,"B","C0P APPLICATION STEPS",175.101)
+
+"^DIC",175.201,175.201,0)
+C0P WEB APPLICATIONS^175.201
+"^DIC",175.201,175.201,0,"GL")
+^C0PAPP(
+"^DIC",175.201,175.201,"%",0)
+^1.005^^
+"^DIC",175.201,175.201,"%D",0)
+^^6^6^3090303^
+"^DIC",175.201,175.201,"%D",1,0)
+This file is being created as part of the ePrescription RMU sprint by 
+"^DIC",175.201,175.201,"%D",2,0)
+George Lilly, Nancy Anthracite, Sam Habiel, and Greg Woodhouse. 
+"^DIC",175.201,175.201,"%D",3,0)
+ 
+"^DIC",175.201,175.201,"%D",4,0)
+The Web Application file contains a sequence of processing steps for a 
+"^DIC",175.201,175.201,"%D",5,0)
+named application. The processing steps are pointers to the C0P 
+"^DIC",175.201,175.201,"%D",6,0)
+APPLICATION STEP file (175.101). 
+"^DIC",175.201,"B","C0P WEB APPLICATIONS",175.201)
+
+**END**
+**END**
