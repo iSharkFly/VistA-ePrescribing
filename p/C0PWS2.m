@@ -1,0 +1,528 @@
+C0PWS2	  ; ERX/GPL - Web Service utilities; 8/31/09; 12/08/2010 ; 5/9/12 12:29am
+	;;1.0;C0P;;Apr 25, 2012;Build 103
+	;Copyright 2009 George Lilly.  Licensed under the terms of the GNU
+	;General Public License See attached copy of the License.
+	; Modified by Chris Richardson, November, 2010.
+	; Code has been modified to accept very large XML documents and block them logically.
+	; 3101208 - RCR - Correct end of buffer condition, BF=">"
+	QUIT
+	;
+	; TEST Lines below not intended for End Users. Programmers only.
+	; BEWARE ZWRITE SYNTAX. It may not work in other M Implementations.
+TEST(C0PDUZ,C0PDFN)	; TEST RETRIEVAL OF PATIENT1 MEDS
+	;S DEBUG=1 ;
+	D SOAP("C0POUT",6,C0PDUZ,C0PDFN)
+	ZWRITE C0POUT ; Should use ^%ZOSV Node, this is very GT.M Specific
+	QUIT
+	;
+ACCOUNTF()	 QUIT 113059002  ; file number for account file
+	;
+XMLFN()	 QUIT 113059001  ; XML TEMPLATE FILE NUMBER
+	;
+BINDFN()	 QUIT 113059001.04 ; FILE NUMBER FOR BINDING SUBFILE
+	;
+	;
+GETTID(C0PWS,C0PTNAME)	; EXTRINSIC WHICH RETURNS THE TEMPLATE ID FOR
+	; TEMPLATE NAMED C0PTNAME BELONGING TO WEB SERVICE NAMED C0PWS
+	; ALSO WORKS IF THE ACCOUNT NUMBER IS PASSED IN C0PWS
+	S C0PXF=113059001 ; FILE NUMBER FOR THE C0P XML TEMPLATE FILE
+	S C0PAF=113059002 ; FILE NUMBER FOR THE C0P WS ACCT FILE
+	N C0PA,C0PT       ; C0P ACCOUNT AND C0P TEMPLATE
+	DO
+	. I C0PWS>0 S C0PA=C0PWS QUIT
+	. ;
+	. DO  ; NAME NOT RECORD NUMBER IS PASSED FOR ACCOUNT
+	. . S C0PA=$O(^C0PS("B",C0PWS,"")) ; RECORD NUMBER OF ACCOUNT
+	. . I C0PA="" D  Q  ; OOPS ACCOUNT NOT FOUND
+	. . . W "ACCOUNT "_C0PWS_" NOT FOUND",!
+	. . .QUIT
+	. .QUIT
+	.QUIT
+	S C0PT=$O(^C0PX("C",C0PA,C0PTNAME,"")) ; RECORD NUMBER OF TEMPLATE
+	; WE USE THE C INDEX TO INSURE THAT THE TEMPLATE BELONGS TO THE WEB SERVICE
+	Q C0PT
+	;
+RESTID(C0PDUZ,C0PTID)	; RESOLVE TEMPLATE ID FROM SUBSCRIPTION
+	;
+	N C0PAIEN,COPACCT,COPWBS,COPUTID
+	S C0PAIEN=$$SUBINIT^C0PSUB(C0PDUZ) ;IEN OF SUBSCRIPTION
+	; N C0PACCT
+	S C0PACCT=$$GET1^DIQ(C0PSUBF,C0PAIEN_","_C0PDUZ_",",1,"I") ;ACCT
+	; N C0PWBS
+	S C0PWBS=$$GET1^DIQ(C0PAF,C0PACCT_",",4,"I") ;WEB SERVICE IEN
+	; N C0PUTID
+	S C0PUTID=$$GETTID(C0PWBS,C0PTID) ;TEMPLATE ID
+	Q C0PUTID
+	;
+SOAP(C0PRTN,C0PTID,C0PDUZ,C0PDFN,C0PVOR)	; MAKES A SOAP CALL FOR 
+	; TEMPLATE ID C0PTID
+	; RETURNS THE XML RESULT IN C0PRTN, PASSED BY NAME
+	; C0PVOR IS THE NAME OF A VARIABLE OVERRIDE ARRAY, WHICH IS APPLIED 
+	; BEFORE MAPPING
+	;
+	; ARTIFACTS SECTION
+	; THE FOLLOWING WILL SET UP DEBUGGING ARTIFACTS FOR A POSSIBLE FUTURE
+	; ONLINE DEBUGGER. IF DEBUG=1, VARIABLES CONTAINING INTERMEDIATE RESULTS
+	; WILL NOT BE NEWED.
+	I $G(DEBUG)="" N C0PV ; CATALOG OF ARTIFACT VARIABLES AND ARRAYS
+	S C0PV(100,"C0PXF","XML TEMPLATE FILE NUMBER")=""
+	S C0PV(200,"C0PHEAD","SOAP HEADER VARIABLE NAME")=""
+	S C0PV(300,"header","SOAP HEADER")=""
+	S C0PV(400,"C0PMIME","MIME TYPE")=""
+	S C0PV(500,"C0PURL","WS URL")=""
+	S C0PV(550,"C0PPURL","PROXY URL")=""
+	S C0PV(600,"C0PXML","XML VARIABLE NAME")=""
+	S C0PV(700,"xml","OUTBOUND XML")=""
+	S C0PV(800,"C0PRSLT","RAW XML RESULT RETURNED FROM WEB SERVICE")=""
+	S C0PV(900,"C0PRHDR","RETURNED HEADER")=""
+	S C0PV(1000,"C0PRXML","XML RESULT NORMALIZED")=""
+	S C0PV(1100,"C0PR","REPLY TEMPLATE")=""
+	S C0PV(1200,"C0PREDUX","REDUX STRING")=""
+	S C0PV(1300,"C0PIDX","RESULT XPATH INDEX")=""
+	S C0PV(1400,"C0PARY","RESULT XPATH ARRAY")=""
+	S C0PV(1500,"C0PNOM","RESULT DOM DOCUMENT NAME")=""
+	S C0PV(1600,"C0PID","RESULT DOM ID")=""
+	N ZI,ZN,ZS
+	S ZN=""
+	D:$G(DEBUG)=""   ; G NOTNEW ; SKIP NEWING THE VARIABLES IF IN DEBUG
+	. S ZI="",ZN="",ZS=""
+	. F  S ZI=$O(COPV(ZI)) Q:ZI=""  D
+	. . ; S ZJ=$O(C0PV(ZI,"")) ; SET UP NEW COMMAND
+	. . S ZN=ZN_ZS_$O(C0PV(ZI,"")),ZS=","
+	. .QUIT
+	.QUIT
+	I $L(ZN) N @ZN  ; Apply collected NEW Variables 1 time
+	; NEW
+	; S ZI=$O(C0PV(ZI))
+	; S ZJ=$O(C0PV(ZI,"")) ; SET UP NEW COMMAND
+	;W ZJ,!
+	; N @ZJ ; NEW THE VARIABLE
+	; I $O(C0PV(ZI))'="" G NEW ;LOOP TO GET NEW IN CONTEXT
+	;NOTNEW
+	; END ARTIFACTS
+	;
+	D INITXPF("C0PF") ; SET FILE NUMBER AND PARAMATERS 
+	S C0PXF=C0PF("XML FILE NUMBER") ; FILE NUMBER FOR THE C0P XML TEMPLATE FILE
+	D
+	. I +C0PTID=0 D  Q  ; A STRING WAS PASSED FOR THE TEMPLATE NAME
+	. . S C0PUTID=$$RESTID(C0PDUZ,C0PTID) ;RESOLVE TEMPLATE IEN FROM NAME
+	. .QUIT
+	. ;
+	. S C0PUTID=C0PTID ; AN IEN WAS PASSED
+	.QUIT
+	N xml,template,header
+	S C0PHEAD=$$GET1^DIQ(C0PXF,C0PUTID_",",2.2,,"header")
+	S C0PMIME=$$GET1^DIQ(C0PXF,C0PUTID_",","MIME TYPE")
+	S C0PPURL=$$GET1^DIQ(C0PXF,C0PUTID_",","PROXY SERVER")
+	;S C0PURL=$$GET1^DIQ(C0PXF,C0PUTID_",","URL") ;GPL CHANGE TO USE PROD FLAG
+	D SETUP^C0PMAIN() ; INITIALIZE C0PACCT IEN OF WS ACCOUNT
+	S C0PURL=$$WSURL^C0PMAIN(C0PACCT) ; RESOLVES PRODUCTION VS TEST
+	S C0PXML=$$GET1^DIQ(C0PXF,C0PUTID_",",2.1,,"xml")
+	S C0PTMPL=$$GET1^DIQ(C0PXF,C0PUTID_",",3,,"template")
+	I C0PTMPL="template" D  ; there is a template to process
+	. K xml ; going to replace the xml array
+	. D EN^C0PMAIN("xml","url",C0PDUZ,C0PDFN,C0PUTID,$G(C0PVOR))
+	. ;N ZZG M ZZG(1)=xml
+	. ;S ZDIR=^TMP("C0CCCR","ODIR")
+	. ;ZWR ZZG(1)
+	. ;W $$OUTPUT^C0CXPATH("xml(1)","GPLTEST-"_ZDFN_".xml",ZDIR)
+	.QUIT
+	I $G(C0PPROXY) S C0PURL=C0PPURL
+	K C0PRSLT,C0PRHDR
+	S ok=$$httpPOST^%zewdGTM(C0PURL,.xml,C0PMIME,.C0PRSLT,.header,"",.gpl5,.C0PRHDR)
+	K C0PRXML
+	I $D(GPLTEST) D  ; WAY TO TEST WITH DATA FROM LIVE
+	. K C0PSRLT ; GPL HACK TO TEST XML FROM LIVE
+	. I GPLTEST=1 M C0PRSLT=^C0PG ; THIS IS THE BIG STATUS EMBEDDED XML FROM LIVE
+	. I GPLTEST=2 M C0PRSLT=^C0PG2 ; THIS IS THE BIG REFILL XML  FROM LIVE 
+	. Q
+	; The following is a temporary fix to keep eRx working while a better 
+	; solution is developed. Template ID 6 is GETMEDS for eRx and it needs
+	; to handle xml files that are too big for NORMAL to handle. So, I wrote
+	; CHUNK which will allow us to handle any size xml file bound for the
+	; EWD parser. 
+	; However, all the other templates in eRx need NORMAL to find the 
+	; embedded XML file in their web service responses. So, we will use
+	; CHUNK for template 6 and continue to use NORMAL for all other templates
+	; we can handle big med lists, but not big web service calls.
+	; What is needed is a better NORMAL (see NORMAL2) or another routine
+	; to detect, extract, and decode embeded XML files of any size. gpl 10/8/10
+	;
+	I $D(C0PRSLT(1)) D  ;
+	. D CHUNK("C0PRXML","C0PRSLT",1000) ;RETURN IN AN ARRAY
+	. I $G(C0PRSLT("RELOC",1,1))'="" D  ; THERE WAS EMBEDED XML
+	. . K C0PRXML ; THROW AWAY WRAPPER
+	. . M C0PRXML=C0PRSLT("RELOC",1) ; REPLACE WITH EMBEDDED DOCUMENT 
+	; D:C0PUTID=6 
+	;. I $D(C0PRSLT(1)) D CHUNK("C0PRXML","C0PRSLT",2000) QUIT  ;RETURN IN AN ARRAY
+	;. ;
+	;. I $D(C0PRSLT(1)) D NORMAL("C0PRXML","C0PRSLT(1)") ;RETURN XML IN AN ARRAY
+	;.QUIT
+	S C0PR=$$GET1^DIQ(C0PXF,C0PUTID_",",.03,"I") ; REPLY TEMPLATE
+	; reply templates are optional and are specified by populating a
+	; template pointer in field 2.5 of the request template
+	; if specified, the reply template is the source of the REDUX string
+	; used for XPath on the reply, and for UNBIND processing
+	; if no reply template is specified, REDUX is obtained from the request
+	; template and no UNBIND processing is performed. The XPath array is
+	; returned without variable bindings
+	I C0PR'="" D  ; REPLY TEMPLATE EXISTS
+	. I +$G(DEBUG)'=0 W "REPLY TEMPLATE:"_C0PR,!
+	. S C0PTID=C0PR ;
+	.QUIT
+	S C0PREDUX=$$GET1^DIQ(C0PXF,C0PUTID_",",2.5) ;XPATH REDUCTION STRING
+	K C0PIDX,C0PARY ; XPATH INDEX AND ARRAY VARS
+	S C0PNOM="C0PMEDS"_$J ; DOCUMENT NAME FOR THE DOM
+	N ZBIG S ZBIG=0
+	;I C0PUTID'=6 D  ;
+	;. S ZBIG=$$TOOBIG("C0PRXML") ; PATCH BY GPL WHICH ASSUMES ONLY
+	;. ; TEMPLATE 1 IS A REGULAR XML FILE.. EVERYTHING ELSE HAS EMBEDDED XML
+	;.QUIT
+	;D
+	;. I ZBIG>0 D    QUIT  ; PROBABLY AN EMBEDDED XML DOCUMENT
+	;. . S C0PID=$$UNWRAP("C0PRXML",ZBIG,C0PNOM) ; DECODE AND PARSE THE EMBEDED XML
+	;. .QUIT
+	;. ;
+	;. ; ELSE
+	;. S C0PID=$$PARSE^C0PXEWD("C0PRXML",C0PNOM) ;CALL THE PARSER
+	;.QUIT
+	; I $D(GPLTEST) B  ; STOP TO LOOK AT C0PRXML --> use ZB SOAP+137^C0PWS2 //SMH
+	S C0PID=$$PARSE^C0PXEWD("C0PRXML",C0PNOM) ;CALL THE PARSER
+	S C0PID=$$FIRST^C0PXEWD($$ID^C0PXEWD(C0PNOM)) ;ID OF FIRST NODE
+	D XPATH^C0PXEWD(C0PID,"/","C0PIDX","C0PARY","",C0PREDUX) ;XPATH GENERATOR
+	S OK=$$DELETE^C0PXEWD(C0PNOM) ; REMOVE PARSED XML FROM THE EWD DOM
+	; Next, call UNBIND to map the reply XPath array to variables
+	; This is only done if a Reply Template is provided
+	D DEMUXARY(C0PRTN,"C0PARY")
+	; M @C0PRTN=C0PARY
+	QUIT
+	;
+TOOBIG(ZXML)	; EXTRINSIC WHICH RETURNS TRUE IF ANY NODE IS OVER 2000 CHARS
+	; RETURNS THE INDEX OF THE LARGE NODE . IF NO LARGE NODE, RETURNS ZERO
+	N ZI,ZR
+	S ZI=""
+	S ZR=0 ; DEFAULT FALSE
+	; First time we go over 1,000, we can stop.
+	F  S ZI=$O(@ZXML@(ZI)) Q:ZI=""  I $L(@ZXML@(ZI))>1000 S ZR=ZI Q   ; First oversize stops
+	QUIT ZR
+	; ===================
+NORMAL(OUTXML,INXML)	;NORMALIZES AN XML STRING PASSED BY NAME IN INXML
+	; INTO AN XML ARRAY RETURNED IN OUTXML, ALSO PASSED BY NAME
+	;
+	N INBF,ZI,ZN,ZTMP
+	S ZN=1,INBF=@INXML
+	S @OUTXML@(ZN)=$P(INBF,"><",ZN)_">"
+	; S ZN=ZN+1
+	; F  S @OUTXML@(ZN)="<"_$P(@INXML,"><",ZN) Q:$P(@INXML,"><",ZN+1)=""  D  ;
+	; Should speed up, and not leave a dangling node, and doesn't stop at first NULL
+	F ZN=2:1:$L(INBF,"><") S @OUTXML@(ZN)="<"_$P(INBF,"><",ZN)_">"
+	; . ; S ZN=ZN+1 
+	; .QUIT
+	QUIT
+	;  ================
+	; The goal of this block has changed a little bit.  Most modern MUMPS engines can
+	; handle a 1,000,000 byte string.  We will use BF to hold hunks that big so that 
+	; we can logically suck up a big hunk of the input to supply the reblocking of the XML
+	; into more logical blocks less than 2000 bytes in length blocks.
+	; A series of signals will be needed, Source (INXML) is exhausted (INEND),
+	; BF is less than 2200 bytes (BFLD, BuFfer reLoaD)
+	; BF is Full (BF contains 998,000 bytes or more, BFULL)
+	; BF and Process is Complete (BFEND)
+	; ZSIZE defaults to 2,000 now, but can be set lower or higher
+	;
+CHUNK(OUTXML,INXML,ZSIZE)	; BREAKS INXML INTO ZSIZE BLOCKS
+	; INXML IS AN ARRAY PASSED BY NAME OF STRINGS
+	; OUTXML IS ALSO PASSED BY NAME
+	; IF ZSIZE IS NOT PASSED, 2000 IS USED
+	I '$D(ZSIZE) S ZSIZE=2000 ; DEFAULT BLOCK SIZE
+	N BF,BFEND,BFLD,BFMAX,BFULL,INEND,ZB,ZI,ZJ,ZK,ZL,ZN
+	; S ZB=ZSIZE-1
+	S ZN=1
+	S BFMAX=998000
+	S ZI=0 ; BEGINNING OF INDEX TO INXML
+	S (BFLD,BFEND,BFULL,INEND)=0,BF=""
+	; Major loop loads the buffer, BF, and unloads it into the Output Array
+	;  in 
+	F  D  Q:BFEND
+	. ; Input LOADER
+	. D:'INEND
+	. . F  S ZI=$O(@INXML@(ZI)) S INEND=(ZI="")  Q:INEND!BFULL  D   ; LOAD EACH STRING IN INXML
+	. . . S BF=BF_@INXML@(ZI)                                       ; ADD TO THE BF STRING
+	. . . S BFULL=($L(BF)>BFMAX)
+	. . .QUIT
+	. .QUIT
+	. ;  Full Buffer, BF, now check for Encryption and Unpack
+	. D TEST4COD(.BF,"C0PRSLT(""RELOC"")")
+	. ; Output BREAKER
+	. F  Q:BFLD  D   ; ZJ=1:ZSIZE:ZL D  ;
+	. . ; ZK=$S(ZJ+ZB<ZL:ZJ+ZB,1:ZL) ; END FOR EXTRACT
+	. . F ZK=ZSIZE:-1:0  Q:$E(BF,ZK)=">"
+	. . I ZK=0 S ZK=ZSIZE
+	. . S @OUTXML@(ZN)=$E(BF,1,ZK) ; PULL OUT THE PIECE
+	. . S ZN=ZN+1 ; INCREMENT OUT ARRAY INDEX
+	. . S BF=$E(BF,ZK+1,BFMAX)
+	. . S BFLD=($L(BF)<(ZSIZE*2))
+	. .QUIT
+	. S BFEND=(INEND&BFLD)!(">"[BF)
+	. I $L(BF)&BFEND S @OUTXML@(ZN)=BF,BF=""
+	.QUIT
+	QUIT
+	;  ==============
+	; Test for Encryption, extract it and decode it.
+TEST4COD(INBF,RELOC)	
+	N DBF,I,MSK,TBF,TRG,RCNT
+	S RCNT=0
+	;  Segments expected <seg 1>DATA</seg 1><seg 2>DATA</seg 2>
+	;                           ^   ^
+	S MSK=""   ; It turns out that some of the characters used were not reliable
+	F I=32:1:42,44:1:47,62:1:64,91:1:96 S MSK=MSK_$C(I)
+	F I=1:1:$L(INBF,"</")-1 D
+	. S TBF=$RE($P($RE($P(INBF,"</",I)),">"))
+	. ; Remove sample for testing
+	. ; Set the trigger, mostly included to show intent and associated code
+	. ;  this could be refined later if determined already obvious enough
+	. S TRG=0
+	. ;DO:$L(TBF)>20  ; If $TR doesn't remove anything, then these characters are not there
+	. ; gpl  trying to keep refills from crashing.. 20 chars is not enough
+	. DO:$L(TBF)>100  ; If $TR doesn't remove anything, then these characters are not there
+	. . I (TBF=$TR(TBF,MSK))   S TRG=1
+	. . ; I (TBF=$TR(TBF," <->@*!?.,:;#$%&[/|\]={}~")) S TRG=1
+	. . ;   <>!"#$%&'()*,-./67:;<>?@[\]^_`fqr{|}~  <<= Ignore 6,7,f,q, and r
+	. . ; Now we set up for the DECODE and replacement in INBF
+	. . DO:TRG
+	. . . N A,C,CC,CV,CCX,K,XBF,T,V
+	. . . DO
+	. . . . N I
+	. . . . S DBF=$$DECODER(TBF)
+	. . . .QUIT
+	. . . ;
+	. . . S CCX=""
+	. . . F K=1:1:$L(DBF) S CC=$E(DBF,K) S:CC?1C C=$A(CC),A(C)=$G(A(C))+1
+	. . . S C="",V=""
+	. . . F  S C=$O(A(C)) Q:C=""  S CCX=CCX_$C(C) S:A(C)>V V=A(C),CV=C
+	. . . S CC=$C(CV)
+	. . . ;  The "_$C(13,10)_" may need to be generalized, tested and set earlier
+	. . . ;    Expand embedded XML in XBF
+	. . . F K=1:1:$L(DBF,CC) S T=$P(DBF,CC,K),XBF(K)=$TR(T,CCX)
+	. . . S RCNT=RCNT+1
+	. . . M @RELOC@(RCNT)=XBF
+	. . . ;   Curley braces and = makes it so it won't trigger a second time by retest.                                
+	. . . S INBF=$P(INBF,TBF)_"<{REPLACED}="_RCNT_$P(INBF,TBF,2,999)
+	. . .QUIT
+	. .QUIT
+	.QUIT
+	;  Now shorten the INBF so it gets smaller
+	;S INBF=$P(INBF,">",I+1,99999)
+	QUIT
+	;
+DECODER(BF)	; Decrypts the Encrypted Strings
+	QUIT $$DECODE^RGUTUU(BF)
+	;
+NORMAL2(OUTXML,INXML)	;NORMALIZES AN ARRAY OF XML STRINGS PASSED BY NAME INXML
+	; AS @INXML@(1) TO @INXML@(x) ALL NUMERIC
+	; INTO AN XML ARRAY RETURNED IN OUTXML, ALSO PASSED BY NAME
+	; this routine doesn't work unless the blocks are on xml tag boundaries - gpl
+	; which is hard to do... this routine is left here awaiting future development
+	N ZI,ZN,ZJ
+	S ZJ=0
+	S ZN=1
+	F  S ZJ=$O(@INXML@(ZJ)) Q:+ZJ=0  D  ; FOR EACH XML STRING IN ARRAY
+	. S @OUTXML@(ZN)=$P(@INXML@(ZJ),"><",ZN)_">"
+	. S ZN=ZN+1
+	. F  S @OUTXML@(ZN)="<"_$P(@INXML@(ZJ),"><",ZN) Q:$P(@INXML@(ZJ),"><",ZN+1)=""  D  ;
+	. . S @OUTXML@(ZN)=@OUTXML@(ZN)_">"
+	. . S ZN=ZN+1
+	. .QUIT
+	.QUIT
+	QUIT
+	;  ===============
+	;
+UNWRAP(ZXML,ZI,ZNOM)	; EXTRINSIC TO LOCATE, DECODE AND PARSE AN EMBEDED XML DOC
+	; RETURNS THE DOCID OF THE DOM
+	N ZS,ZX
+	S ZS=$P($P(@ZXML@(ZI),">",2),"<",1) ; PULL OUT THE ENCODED STRING
+	S ZX=$$DECODE^RGUTUU(ZS)
+	N ZZ
+	N ZY S ZY="<?xml version=""1.0"" encoding=""utf-8""?>"
+	I $E(ZX,1,5)'="<?xml" S ZZ(1)=ZY_ZX
+	E  S ZZ(1)=ZX
+	N ZI
+	;F ZI=1:1 Q:$$REDUCE(.ZZ,ZI) ; CHOP THE STRING INTO 4000 CHAR ARRAY
+	S ZI=$$REDUCRCR(.ZZ,1) ; RECURSIVE VERSION OF REDUCE
+	S G=$$PARSE^C0PXEWD("ZZ",C0PNOM)
+	; GTM Specific
+	; I G=0 ZWR ^TMP("MXMLERR",$J,*) B
+	QUIT G
+	;  =============
+REDUCE(ZARY,ZN)	; WILL REDUCE ZARY(ZN) BY CHOPPING IT TO 4000 CHARS
+	; AND PUTTING THE REST IN ZARY(ZN+1)
+	; ZARY IS PASSED BY REFERENCE
+	; EXTRINSIC WHICH RETURNS FALSE IF THERE IS NOTHING TO REDUCE
+	I $L(ZARY(ZN))<4001   QUIT 0 ;NOTHING TO REDUCE
+	;
+	S ZARY(ZN+1)=$E(ZARY(ZN),4001,$L(ZZ(ZN))) ;BREAK IT UP
+	S ZARY(ZN)=$E(ZARY(ZN),1,4000) ;  
+	QUIT 1  ;ACTUALLY REDUCED
+	;  ===========
+REDUCRCR(ZARY,ZN)	; RECURSIVE VERSION OF REDUCE ABOVE
+	; WILL REDUCE ZARY(ZN) BY CHOPPING IT TO 4000 CHARS
+	; AND PUTTING THE REST IN ZARY(ZN+1)
+	; ZARY IS PASSED BY REFERENCE
+	; EXTRINSIC WHICH RETURNS FALSE IF THERE IS NOTHING TO REDUCE
+	I $L(ZARY(ZN))<4001 Q 0 ;NOTHING TO REDUCE
+	; 
+	S ZARY(ZN+1)=$E(ZARY(ZN),4001,$L(ZZ(ZN))) ;BREAK IT UP
+	S ZARY(ZN)=$E(ZARY(ZN),1,4000) ;  
+	I '$$REDUCRCR(.ZARY,ZN+1) Q 1 ; CALL RECURSIVELY
+	;  
+	QUIT 1  ;ACTUALLY REDUCED
+	;
+DEMUXARY(OARY,IARY)	;CONVERT AN XPATH ARRAY PASSED AS IARY TO
+	; FORMAT @OARY@(x,xpath) where x is the first multiple
+	N ZI,ZJ,ZK,ZL S ZI=""
+	F  S ZI=$O(@IARY@(ZI)) Q:ZI=""  D  ;
+	. D DEMUX^C0CMXP("ZJ",ZI)
+	. S ZK=$P(ZJ,"^",3)
+	. S ZK=$RE($P($RE(ZK),"/",1))
+	. S ZL=$P(ZJ,"^",1)
+	. I ZL="" S ZL=1
+	. S @OARY@(ZL,ZK)=@IARY@(ZI)
+	.QUIT
+	QUIT
+	;
+PARSE(INXML,INDOC)	;CALL THE EWD PARSER ON INXML, PASSED BY NAME
+	; INDOC IS PASSED AS THE DOCUMENT NAME TO EWD
+	; EXTRINSIC WHICH RETURNS THE DOCID ASSIGNED BY EWD
+	N ZR
+	M ^CacheTempEWD($j)=@INXML ;
+	S ZR=$$parseDocument^%zewdHTMLParser(INDOC)
+	K ^CacheTempEWD($j) ;clean up after
+	QUIT ZR
+	;
+TBLD(INT)	; TEMPLATE BUILD OF TEMPLATE INT
+	; want to break this up into pieces -  gpl
+	; THE TEMPLATE NEEDS TO EXIST AND THE DEFINING XML URL MUST BE POPULATED
+	; THEN THE DEFINING XML WILL BE RETRIVED AND STORED INTO THE RAW XML FIELD
+	; IT WILL BE TRANSFORMED INTO A TEMPLATE AND STORED IN THE TEMPLATE FIELD
+	; ALL THE XPATHs WILL BE EXTRACTED AND A BINDING MULTIPLE CREATED FOR EACH
+	; ALL IN ONE SIMPLE ROUTINE
+	; WHAT REMAINS IS FOR MANUAL ENTRY OF THE OTHER FIELDS IN THE BINDINGS
+	N C0PXTF S C0PXTF=113059001 ; XML TEMPLATE FILE
+	N C0PURL ; URL TO RETRIEVE THE DEFINING XML FOR THE TEMPLATE
+	S C0PURL=$$GET1^DIQ(C0PXTF,INT,2)
+	D GET1URL^C0PEWD2(C0PURL)
+	D CLEAN^DILF
+	; D WP^DIE(ZF,ZIEN_",",1,,$NA(@ZOR@(ZD,ZI,"TX"))) ; WP OF ORDER TXT
+	D WP^DIE(C0PXTF,INT_",",2.1,,$NA(gpl))
+	D WP^DIE(C0PXTF,INT_",",3,,$NA(gplTEMP))
+	;N C0PFDA ; DON'T NEW FOR TESTING
+	D ADDXP("gpl2",INT)
+	QUIT
+	;  ==========
+COMPILE(INTID)	;COMPILE A XML TEMPLATE IN RECORD INTID
+	D INITXPF("C0PF") ;FILE ARRAY TO POINT TO C0P FILES
+	D COMPILE^C0CMXP(INTID,"C0PF") ;COMPILE THE TEMPLATE
+	QUIT
+	;  ==========
+CPBIND(INID,OUTID,FORCE)	; COPIES XPATH BINDINGS FROM TEMPLATE INID
+	; TO TEMPLATE OUTID - ONLY BINDINGS FOR MATCHING XPATHS ARE COPIED
+	; NOTE - REDO THIS TO USE FILEMAN CALLS GPL
+	; WILL NOT OVERWRITE UNLESS FORCE=1
+	N FARY,ZI
+	S FARY="C0PF"
+	D INITXPF("C0PF")
+	I +OUTID=0 S OUTID=$$RESTID^C0CSOAP(OUTID,FARY) ;RESOLVE TEMPLATE NAME
+	I +INID=0 S INID=$$RESTID^C0CSOAP(INID,FARY) ;RESOLVE TEMPLATE NAME
+	S ZI=0
+	F  S ZI=$O(^C0PX(OUTID,5,ZI)) Q:+ZI=0  D  ; FOR EACH XPATH IN OUTID
+	. W !,ZI," ",^C0PX(OUTID,5,ZI,0)
+	. S ZN=^C0PX(OUTID,5,ZI,0)
+	. I $D(^C0PX(OUTID,5,ZI,1)) D  ;Q  ;
+	. . W !,"ERROR XPATH BINDING EXISTS ",ZI
+	. .QUIT
+	. D  ; LOOK FOR MATCHING XPATH IN SOURCE
+	. . S ZJ=$O(^C0PX(INID,5,"B",ZN,""))
+	. . ;W " FOUND:",ZJ
+	. . I ZJ'="" D  ;
+	. . . ;W !,"SETTING ",$G(^C0PX(INID,5,ZJ,1))
+	. . . S ^C0PX(OUTID,5,ZI,0)=^C0PX(INID,5,ZJ,0) ;GET BOTH FIELDS
+	. . . S ^C0PX(OUTID,5,ZI,1)=$G(^C0PX(INID,5,ZJ,1))
+	QUIT
+	;
+INITXPF(ARY)	;INITIAL XML/XPATH FILE ARRAY
+	;
+	S @ARY@("XML FILE NUMBER")=113059001
+	S @ARY@("BINDING SUBFILE NUMBER")=113059001.04
+	S @ARY@("MIME TYPE")="2.3"
+	S @ARY@("PROXY SERVER")="2.4"
+	S @ARY@("REPLY TEMPLATE")=".03"
+	S @ARY@("TEMPLATE NAME")=".01"
+	S @ARY@("TEMPLATE XML")="3"
+	S @ARY@("URL")="1"
+	S @ARY@("WSDL URL")="2"
+	S @ARY@("XML")="2.1"
+	S @ARY@("XML HEADER")="2.2"
+	S @ARY@("XPATH REDUCTION STRING")="2.5"
+	S @ARY@("CCR VARIABLE")="4"
+	S @ARY@("FILEMAN FIELD NAME")="1"
+	S @ARY@("FILEMAN FIELD NUMBER")="1.2"
+	S @ARY@("FILEMAN FILE POINTER")="1.1"
+	S @ARY@("INDEXED BY")=".05"
+	S @ARY@("SQLI FIELD NAME")="3"
+	S @ARY@("VARIABLE NAME")="2"
+	QUIT
+	;
+ADDXP(INARY,TID)	;ADD XPATH .01 FIELD TO BINDING SUBFILE OF TEMPLATE TID
+	N FARY
+	S FARY="C0PFILES"
+	D INITXPF(FARY)
+	D ADDXP^C0CMXP(INARY,TID,FARY) ;
+	QUIT
+	;
+ADDXML(INXML,TEMPID)	;ADD XML TO A TEMPLATE ID TEMPID
+	; INXML IS PASSED BY NAME
+	N FARY S FARY="C0PFILES"
+	D INITXPF(FARY)
+	D ADDXML^C0CMXP(INXML,TEMPID,FARY) ;CALL C0C ROUTINE TO ADD TO THE FILE
+	QUIT
+	;
+ADDTEMP(INXML,TEMPID,FARY)	;ADD XML TEMPLATE TO TEMPLATE RECORD TEMPID FIELD 3
+	;
+	N FARY
+	S FARY="C0PFILES"
+	D INITXPF(FARY)
+	D ADDTEMP^C0CMXP(INXML,TEMPID,FARY)
+	QUIT
+	;
+GETXML(OUTXML,TEMPID,FARY)	;GET THE XML FROM TEMPLATE TEMPID
+	;
+	N FARY
+	S FARY="C0PFILES"
+	D INITXPF(FARY)
+	N C0PUTID ; TEMPLATE IEN TO USE
+	D GETXML^C0CMXP(OUTXML,TEMPID,FARY)
+	QUIT
+	;
+GETTEMP(OUTXML,TEMPID,FARY)	;GET THE TEMPLATE XML FROM TEMPLATE TEMPID
+	;
+	N FARY
+	S FARY="C0PFILES"
+	D INITXPF(FARY)
+	N C0PUTID ; TEMPLATE IEN TO USE
+	D GETTEMP^C0CMXP(OUTXML,TEMPID,FARY)
+	QUIT
+	;
+COPYHDR(ZS,ZD)	; COPY XML HEADER FROM RECORD ZS TO ZD
+	; ASSUMES C0P XML TEMPLATE FILE
+	N FARY
+	D INITXPF("FARY")
+	D COPYWP^C0CMXP("XML HEADER",ZS,ZD,"FARY")
+	QUIT
+	;
+UPDIE	  ; INTERNAL ROUTINE TO CALL UPDATE^DIE AND CHECK FOR ERRORS
+	K ZERR
+	D CLEAN^DILF
+	D UPDATE^DIE("","C0PFDA","","ZERR")
+	I $D(ZERR) D ERROR^C0PMAIN(",U113059008,",$ST($ST,"PLACE"),"ERX-UPDIE-FAIL","Fileman Data Update Failure") QUIT
+	K C0PFDA
+	QUIT

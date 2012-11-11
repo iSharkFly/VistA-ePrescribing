@@ -1,0 +1,299 @@
+C0PALGY2	  ; ERX/GPL/SMH - eRx Allergy utilities ; 5/8/12 11:52pm
+	;;1.0;C0P;;Apr 25, 2012;Build 103
+	;Copyright 2009 George Lilly.  Licensed under the terms of the GNU
+	;General Public License See attached copy of the License.
+	;
+	;This program is free software; you can redistribute it and/or modify
+	;it under the terms of the GNU General Public License as published by
+	;the Free Software Foundation; either version 2 of the License, or
+	;(at your option) any later version.
+	;
+	;This program is distributed in the hope that it will be useful,
+	;but WITHOUT ANY WARRANTY; without even the implied warranty of
+	;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	;GNU General Public License for more details.
+	;
+	;You should have received a copy of the GNU General Public License along
+	;with this program; if not, write to the Free Software Foundation, Inc.,
+	;51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+	;
+	Q
+	;
+	; THESE ROUTINES ARE USED TO TEST AND VALIDATE THE USE OF THE RXNORM
+	; DATABASE FOR LOOKING UP IDS AND MATCHING FIRST DATA BANK IDS TO 
+	; RXNORM CONCEPT IDS AND THEN FROM RXNORM CONCEPT IDS TO VISTA VUIDS
+	; THE PARTICULAR INTEREST HERE IS FOR MATCHING ALLERGIES TO A MEDICATION
+	; IN ADDITION THERE ARE ROUTINES HERE TO POPULATE THE C0P FDB ALLERGIES
+	; FILE.
+	; NONE OF THESE ROUTINES ARE USED IN REGULAR ERX ACTIVITIES. THEY
+	; ARE BROUGHT FORWARD AS PART OF THE ERX PACKAGE FOR DEBUGGING AND 
+	; FUTURE DEVELOPMENT
+	; GPL JUN 2010
+TESTBASE	; TEST LOOKING UP CONCEPT IDS IN RXNORM
+	;
+	N ZI
+	S ZI=""
+	S (COUNT,FOUND)=0
+	F  S ZI=$O(^C0PALGY("TYPE","BASE",ZI)) Q:ZI=""  D  ; FOR EACH BASE CONCEPT
+	. S COUNT=COUNT+1
+	. S ZJ=$$GET1^DIQ(113059005,ZI_",",1,"E")
+	. S ZN=$$GET1^DIQ(113059005,ZI_",",.01,"E")
+	. S ZV=$$BASE^C0PALGY1(ZJ) ;LOOKUP VISTA MATCH
+	. I ZV'="" S FOUND=FOUND+1
+	. W !,ZJ," ",ZN," :: ",ZV
+	W !,"COUNT:",COUNT," FOUND:",FOUND
+	Q
+	;
+TESTNAME	; TEST LOOKING UP CONCEPT IDS IN RXNORM
+	;
+	N ZI
+	S ZI=""
+	S (COUNT,FOUND)=0
+	F  S ZI=$O(^C0PALGY("TYPE","NAME",ZI)) Q:ZI=""  D  ; FOR EACH BASE CONCEPT
+	. S COUNT=COUNT+1
+	. S ZJ=$$GET1^DIQ(113059005,ZI_",",1,"E")
+	. S ZN=$$GET1^DIQ(113059005,ZI_",",.01,"E")
+	. S ZV=$$NAME^C0PALGY1($$UP^XLFSTR(ZN)) ;LOOKUP VISTA MATCH
+	. I ZV'="" S FOUND=FOUND+1
+	. W !,ZJ," ",ZN," :: ",ZV
+	W !,"COUNT:",COUNT," FOUND:",FOUND
+	Q
+	;
+TEST3	;
+	;
+	S ZI=0
+	S (COUNT,FOUND)=0
+	F  S ZI=$O(^PSNDF(50.6,ZI)) Q:+ZI=0  D  ; FOR EVERY DRUG IN THE NDF
+	. S COUNT=COUNT+1
+	. S ZJ=$G(^PSNDF(50.6,ZI,"VUID")) ;VUID
+	. S ZJ=$P(ZJ,"^",1) ;JUST THE FIRST PIECE
+	. S ZJN=$G(^PSNDF(50.6,ZI,0)) ; VA NAME
+	. W !,ZJN," ",ZJ
+	. S ZK=$$NDDFBAS2^C0PLKUP(ZJ)
+	. I ZK'=0 D  ; FDB CONCEPT ID FOUND
+	. . S ZL=$O(^C0PALGY("C2","BASE",ZK,""))
+	. . S ZN=$$GET1^DIQ(113059005,ZL_",",.01,"E")
+	. . I ZN'="" D  ;
+	. . . S FOUND=FOUND+1
+	. . . S ZP=ZI_";PSNDF(50.6,"
+	. . . S C0PFDA(113059005,ZL_",",6)=ZP
+	. . . D UPDIE
+	. . W $C(9),ZI," ",ZJ," :: ",ZK," ",ZN
+	W !,"COUNT:",COUNT," FOUND:",FOUND
+	Q
+	;
+TEST4	;
+	;
+	S ZI=0
+	S (COUNT,FOUND)=0
+	F  S ZI=$O(^PS(50.416,ZI)) Q:+ZI=0  D  ; DRUG INGREDIENTS FILE 
+	. S COUNT=COUNT+1
+	. S ZJ=$G(^PS(50.416,ZI,"VUID")) ;VUID
+	. S ZJ=$P(ZJ,"^",1) ;JUST THE FIRST PIECE
+	. S ZJN=$G(^PS(50.416,ZI,0)) ; VA NAME
+	. W !,ZJN," ",ZJ
+	. S ZK=$$NDDFBAS2^C0PLKUP(ZJ)
+	. ;I ZI=3912 B
+	. I ZK'=0 D  ; FDB CONCEPT ID FOUND
+	. . S ZL=$O(^C0PALGY("C2","BASE",ZK,""))
+	. . S ZN=$$GET1^DIQ(113059005,ZL_",",.01,"E")
+	. . I ZN'="" D  ;
+	. . . S FOUND=FOUND+1
+	. . . W $C(9),ZI," ",ZJ," :: ",ZK," ",ZN
+	. . . S ZP=ZI_";PS(50.416,"
+	. . . S C0PFDA(113059005,ZL_",",6)=ZP
+	. . . D UPDIE
+	W !,"COUNT:",COUNT," FOUND:",FOUND
+	Q
+	;
+TEST5	; VA PRODUCT FILE
+	;
+	S ZI=0
+	S (COUNT,FOUND)=0
+	F  S ZI=$O(^PSNDF(50.68,ZI)) Q:+ZI=0  D  ; FOR EVERY DRUG IN THE NDF
+	. S COUNT=COUNT+1
+	. S ZJ=$G(^PSNDF(50.68,ZI,"VUID")) ;VUID
+	. S ZJ=$P(ZJ,"^",1) ;JUST THE FIRST PIECE
+	. S ZJN=$G(^PSNDF(50.68,ZI,0)) ; VA NAME
+	. ;W !,ZJN," ",ZJ
+	. S ZK=$$NDDFBAS2^C0PLKUP(ZJ)
+	. I ZK'=0 D  ; FDB CONCEPT ID FOUND
+	. . S ZL=$O(^C0PALGY("C2","NAME",ZK,""))
+	. . S ZN=$$GET1^DIQ(113059005,ZL_",",.01,"E")
+	. . I ZN'="" D  ;
+	. . . S FOUND=FOUND+1
+	. . . S ZP=ZI_";PSNDF(50.68,"
+	. . . S C0PFDA(113059005,ZL_",",6)=ZP
+	. . . D UPDIE
+	. . W !,ZJN," ",ZJ
+	. . W $C(9),ZI," ",ZJ," :: ",ZK," ",ZN
+	W !,"COUNT:",COUNT," FOUND:",FOUND
+	Q
+	;
+TEST6	; CHECK ALL VUIDS IN VA PRODUCT FILE AGAINST RXNORM CONCEPT FILE
+	;
+	S ZI=0
+	S (COUNT,FOUND)=0
+	F  S ZI=$O(^PSNDF(50.68,ZI)) Q:+ZI=0  D  ; FOR EVERY DRUG IN THE NDF
+	. S COUNT=COUNT+1
+	. S ZJ=$G(^PSNDF(50.68,ZI,"VUID")) ;VUID
+	. S ZJ=$P(ZJ,"^",1) ;JUST THE FIRST PIECE
+	. S ZJN=$G(^PSNDF(50.68,ZI,0)) ; VA NAME
+	. ;W !,ZJN," ",ZJ
+	. S ZRXN=$O(^C0P("RXN","VUID",ZJ,""))
+	. I ZRXN'="" S FOUND=FOUND+1
+	W !,"COUNT:",COUNT," FOUND:",FOUND
+	Q
+	;
+TEST7	; CHECK ALL CONCEPT IDS IN THE FDB ALLERGY FILE AGAINST THE 
+	;RXNORM CONCEPT FILE - THIS APPOACH DOESN'T WORK.
+	;
+	S ZI=0
+	S (COUNT,FOUND)=0
+	F  S ZI=$O(^C0PALGY("C",ZI)) Q:+ZI=0  D  ; EVERY FDB ALLERGY CONCEPT
+	. S ZIN=$$GET1^DIQ(113059005,ZI_",",.01) ;NAME OF CONCEPT
+	. S ZJ=$O(^C0P("RXN","B",ZI,"")) ; RXNORM CONCEPT FIELD IS .01
+	. S COUNT=COUNT+1
+	. I ZJ'="" D  ; FOUND
+	. . S FOUND=FOUND+1
+	. . S ZJN=$G(^C0P("RXN",ZJ,1,1,0)) ;NAME OF CONCEPT
+	. . ;S ZJNNN=$$GET1^DIQ(1130590011.101,ZJ_",",,ZJN)
+	. . I ZIN'="" W !,ZI,ZIN," :: ",ZJ," ",ZJN
+	W !,"COUNT:",COUNT," FOUND:",FOUND
+	Q
+	;
+TESTC	; PRINT OUT DUPLICATES IN THE FROM THE C INDEX OF THE ALLERGY FILE
+	;
+	S (COUNT,COUNT2)=0
+	S ZI=""
+	F  S ZI=$O(^C0PALGY("C",ZI)) Q:ZI=""  D  ;
+	. S ZJ=$O(^C0PALGY("C",ZI,"")) ;IEN
+	. I $O(^C0PALGY("C",ZI,ZJ))'="" D  ;
+	. . S ZZ=""
+	. . F  S ZZ=$O(^C0PALGY("C",ZI,ZZ)) Q:ZZ=""  D  ;
+	. . . S COUNT=COUNT+1
+	. . . S ZK=$$GET1^DIQ(113059005,ZZ_",",6)
+	. . . S ZL=$$GET1^DIQ(113059005,ZZ_",",.01)
+	. . . S ZT=$$GET1^DIQ(113059005,ZZ_",",2)
+	. . . I ZK'="" S COUNT2=COUNT2+1
+	. . . S DUPS(ZI,ZL,ZT)=ZK
+	. . . W !,ZK," ",ZI
+	Q
+	;
+COUNT	; COUNT THE NUMBER OF MAPPINGS IN VA POINTER INDEX OF FDB ALLERGIES
+	;
+	N ZI,ZJ,COUNT
+	S COUNT=0
+	S ZI="" S ZJ=""
+	F  S ZI=$O(^C0PALGY("VA",ZI)) Q:ZI=""  D  ;
+	. S ZJ=""
+	. F  S ZJ=$O(^C0PALGY("VA",ZI,ZJ)) Q:ZJ=""  D  ;
+	. . S COUNT=COUNT+1
+	W !,"COUNT: ",COUNT,!
+	Q
+	;
+CHECK	; CHECK ALL ALLERGIES IN THE PATIENT ALLERGY FILE FOR MATCHES IN
+	; THE FDB ALLERGY FILE
+	N ZI,ZJ,COUNT
+	S (ZI,ZJ)=0 S COUNT=0 S COUNT2=0
+	F  S ZI=$O(^GMR(120.8,ZI)) Q:+ZI=0  D  ; FOR EACH ENTRY
+	. S ZJ=^GMR(120.8,ZI,0) ; ZERO NODE
+	. S PAT=$P(ZJ,U,1) ;PATIENT
+	. S ZN=$P(ZJ,U,2) ;REACTANT NAME
+	. S GMR=$P(ZJ,U,3) ;POINTER
+	. S COUNT=COUNT+1
+	. S FOUND=$O(^C0PALGY("VA",GMR,"")) ; VA POINTER INDEX
+	. S ZF=""
+	. I FOUND'="" D  ;
+	. . S COUNT2=COUNT2+1
+	. . S ZF=$$GET1^DIQ(113059005,FOUND_",",.01,"E")
+	. W !,"PAT:",PAT," ",ZN," ",GMR," :: ",FOUND," ",ZF
+	W !,"COUNT:",COUNT," FOUND:",COUNT2
+	Q
+	;
+LOADRXN	; LOAD THE FDB TO RXNORM CSV FILE INTO ^TMP
+	; THE FILE NAME IS CompositeAllergyID2RxCui.csv
+	; AND IT IS STORED IN /home/dev
+	N ZG
+	S ZG=$NA(^TMP("C0PALGY","RXNCSV",1))
+	W $$FTG^%ZISH("/home/dev/","CompositeAllergyID2RxCui.csv",ZG,3) ;INCREMENT
+	; 3rd NODE
+	Q
+	;
+ADDRXN	; ADD THE CompositeAllergyID to rxcui mapping to the 
+	; C0P FDB ALLERGY file
+	; the csv file with the mapping has been loaded into
+	; ^TMP("C0PALGY","RXNCSV") - see LOADRXN routine above
+	N ZI,ZJ,ZARY,ZF,C0PFDA
+	S ZF=113059005 ; FILE NUMBER FOR C0P FDB ALLERGY FILE
+	S ZARY=$NA(^TMP("C0PALGY","RXNCSV"))
+	S ZJ=$O(@ZARY@(""),-1) ; NUMBER OF ROWS IN THE ARRAY
+	F ZI=2:1:ZJ D  ; SKIP ROW 1, WHICH HAS THE COLUMN NAMES
+	. N ZFDA,ZRXN,ZROW
+	. K C0PFDA
+	. S ZROW=@ZARY@(ZI) ; EACH ROW IS ""X"",""Y""
+	. S ZFDA=$P(ZROW,",",1) ; CompositeAllergyID
+	. S ZFDA=$TR(ZFDA,"""") ; GET RID OF EXTRA QUOTES
+	. S ZRXN=$P(ZROW,",",2) ; rxcui
+	. S ZRXN=$TR(ZRXN,"""") ; GET RID OF EXTRA QUOTES 
+	. W !,ZFDA," ",ZRXN
+	. S ZOHONE=$$GET1^DIQ(ZF,ZFDA_",",.01)
+	. S C0PFDA(ZF,ZFDA_",",.01)=ZOHONE
+	. S C0PFDA(ZF,ZFDA_",",7)=ZRXN ; SET rxcui for ien ZFDA
+	. D UPDIE
+	Q
+	;
+LOOKRXN	; LOOK UP RXCUI VALUES IN THE RXNORM CONCEPT FILE
+	;
+	S COUNT=0 S FOUND=0
+	S ZI=""
+	F  S ZI=$O(^C0PALGY("RXCUI",ZI)) Q:ZI=""  D  ;
+	. S COUNT=COUNT+1
+	. S ZJ=$O(^C0P("RXN","B",ZI,"")) ;
+	. W !,ZI," ",ZJ
+	W !,COUNT," FOUND"
+	Q
+	;
+LOOKFDB	;LOOK UP FDB NUMBERS IN THE RXNORM FILE
+	;
+	S ZI=""
+	F  S ZI=$O(^C0PALGY("C",ZI)) Q:ZI=""  D  ;
+	. S ZJ=$O(^C0PALGY("C",ZI,""))
+	. W !,ZI," ",ZJ
+	Q
+	;
+MKRNF	; CREATING AN RNF FILE FOR THE FDB ALLERGY TABLE
+	;
+	F ZI=1:1:999999 F ZJ=1:1:7 D  ;
+	. I ZJ=1 S ^GRNF("V",ZI,$O(^GRNF("F",ZJ,"")))=ZI
+	. S ZK=$P(^GPLFDB(ZI),""",""",ZJ)
+	. S ZK=$TR(ZK,"""")
+	. I ZJ=6  D  ;STATUS
+	. . I (ZK'="A")&(ZK'="I") D ERROR^C0PMAIN(",U113059009,",$ST($ST,"PLACE"),"ERX-INVALID-DATA","Invalid Data") QUIT
+	. I ZK'="" D  ;
+	. . S ^GRNF("V",ZI,$O(^GRNF("F",ZJ,"")))=ZK
+	Q
+	;
+FILEFDB	;POPULATE C0P FDB ALLERGIES FROM RNF STRUCTURE IN ^GRNF
+	;
+	F ZI=1:1:999999 D  ;
+	. K C0PFDA
+	. S C0PFDA(113059005,"?+1,",.01)=^GRNF("V",ZI,"Description")
+	. S C0PFDA(113059005,"?+1,",.05)=$G(^GRNF("V",ZI,"CompositeAllergyID"))
+	. S C0PFDA(113059005,"?+1,",1)=^GRNF("V",ZI,"ConceptID")
+	. S C0PFDA(113059005,"?+1,",2)=^GRNF("V",ZI,"ConceptType")
+	. S C0PFDA(113059005,"?+1,",3)=^GRNF("V",ZI,"Source")
+	. S C0PFDA(113059005,"?+1,",4)=^GRNF("V",ZI,"Status")
+	. S C0PFDA(113059005,"?+1,",5)=^GRNF("V",ZI,"TouchDate")
+	. ;ZWR C0PFDA
+	. ;B
+	. D UPDIE
+	Q
+	;
+UPDIE	  ; INTERNAL ROUTINE TO CALL UPDATE^DIE AND CHECK FOR ERRORS
+	K ZERR
+	D CLEAN^DILF
+	D UPDATE^DIE("","C0PFDA","","ZERR")
+	I $D(ZERR) D ERROR^C0PMAIN(",U113059008,",$ST($ST,"PLACE"),"ERX-UPDIE-FAIL","Fileman Data Update Failure") QUIT
+	K C0PFDA
+	Q
